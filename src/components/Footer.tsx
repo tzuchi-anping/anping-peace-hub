@@ -34,21 +34,38 @@ const Footer = () => {
 
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">關注我們</h4>
-            <Button 
-              variant="outline" 
-              className="bg-primary-foreground/10 border-primary-foreground/20 hover:bg-primary-foreground/20 hover:border-primary-foreground/40 text-primary-foreground"
-              asChild
-            >
-              <a 
-                href="https://www.facebook.com/share/g/1CfxEx7vXM/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2"
+            <div className="flex flex-col gap-3">
+              <Button 
+                variant="warm"
+                size="lg"
+                asChild
               >
-                <Facebook className="w-4 h-4" />
-                Facebook 粉絲專頁
-              </a>
-            </Button>
+                <a 
+                  href="https://tcit3.tzuchi.net/OCCD/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <Heart className="w-4 h-4" />
+                  立即捐款
+                </a>
+              </Button>
+              <Button 
+                variant="outline" 
+                className="bg-primary-foreground/10 border-primary-foreground/20 hover:bg-primary-foreground/20 hover:border-primary-foreground/40 text-primary-foreground"
+                asChild
+              >
+                <a 
+                  href="https://www.facebook.com/share/g/1CfxEx7vXM/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <Facebook className="w-4 h-4" />
+                  Facebook 粉絲專頁
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
 
