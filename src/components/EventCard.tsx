@@ -1,7 +1,7 @@
 import { Calendar, Clock, Gift, Heart, Lightbulb, Soup, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import blessingImage from "@/assets/blessing-warmth.jpg";
+import blessingImage from "@/assets/year-end-blessing-2025.png";
 
 const EventCard = () => {
   const timeSlots = [
