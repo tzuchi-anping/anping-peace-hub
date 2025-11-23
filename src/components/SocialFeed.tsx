@@ -55,13 +55,13 @@ const SocialFeed = () => {
             </div>
           </Card>
 
-          {/* 記憶保養學苑 Facebook 貼文 */}
+          {/* 記憶保養學苑 Facebook Reel */}
           <Card className="overflow-hidden border-sage-light/20 hover:shadow-xl transition-all duration-300">
             <div className="p-6">
               <h3 className="text-xl font-bold text-foreground mb-4">記憶保養學苑</h3>
               <div className="aspect-square overflow-hidden rounded-lg">
                 <iframe 
-                  src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fp%2F1BpDNp3yiQ%2F&show_text=true&width=500"
+                  src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F812291541801653&show_text=false&width=500"
                   width="100%"
                   height="100%"
                   style={{ border: 'none', overflow: 'hidden' }}
@@ -69,6 +69,24 @@ const SocialFeed = () => {
                   frameBorder="0"
                   allowFullScreen={true}
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  className="w-full h-full"
+                ></iframe>
+              </div>
+            </div>
+          </Card>
+
+          {/* 齊柏林飛閱台灣攝影獎 YouTube */}
+          <Card className="overflow-hidden border-sage-light/20 hover:shadow-xl transition-all duration-300">
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-foreground mb-4">2025 齊柏林飛閱台灣攝影獎</h3>
+              <div className="aspect-video overflow-hidden rounded-lg">
+                <iframe 
+                  src="https://www.youtube.com/embed/QG6HLAgyKmc"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen={true}
                   className="w-full h-full"
                 ></iframe>
               </div>
