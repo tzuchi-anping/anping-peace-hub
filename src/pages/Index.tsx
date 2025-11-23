@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import EventCard from "@/components/EventCard";
 import Programs from "@/components/Programs";
+import SocialFeed from "@/components/SocialFeed";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -9,6 +10,7 @@ const Index = () => {
       <Hero />
       <EventCard />
       <Programs />
+      <SocialFeed />
       <Footer />
     </div>
   );
