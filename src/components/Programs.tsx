@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Sprout, Brain, ExternalLink, Facebook, Instagram, MessageCircle } from "lucide-react";
 import marketImage from "@/assets/market-plants.jpg";
+import memoryCareImage from "@/assets/memory-care.jpg";
 
 const Programs = () => {
   const programs = [
@@ -29,7 +30,7 @@ const Programs = () => {
       icon: Brain,
       title: "安平記憶保養學苑",
       description: "利用社區公共空間，以「一對一的陪伴」為特色，提供長者關懷、餐飲、健康促進活動等服務，並由在地志工人力協助，旨在打造失智友善社區。",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80",
+      image: memoryCareImage,
       links: [
         { type: "facebook", url: "https://www.facebook.com/profile.php?id=100093361091027", icon: Facebook }
       ]
