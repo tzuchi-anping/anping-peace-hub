@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Sprout, Brain, ExternalLink, Facebook, Instagram, MessageCircle } from "lucide-react";
-import marketImage from "@/assets/market-plants.jpg";
+import marketImage from "@/assets/plantopia-market.jpg";
 import memoryCareImage from "@/assets/memory-care.jpg";
 
 const Programs = () => {
