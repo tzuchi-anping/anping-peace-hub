@@ -3,6 +3,7 @@ import EventCard from "@/components/EventCard";
 import Programs from "@/components/Programs";
 import SocialFeed from "@/components/SocialFeed";
 import Footer from "@/components/Footer";
+import FloatingActions from "@/components/FloatingActions";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <Programs />
       <SocialFeed />
       <Footer />
+      <FloatingActions />
     </div>
   );
 };
