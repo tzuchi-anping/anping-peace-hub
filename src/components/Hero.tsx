@@ -1,8 +1,36 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-market.jpg";
-import { Heart, MapPin, Phone } from "lucide-react";
+import { Heart, MapPin, Phone, Share2, Facebook, Link2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const Hero = () => {
+  const handleShare = async () => {
+    const shareData = {
+      title: '慈濟安平聯絡處',
+      text: '在這個溫暖的社區空間，我們以慈悲為懷，以愛心關懷每一個人',
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "連結已複製",
+          description: "網址已複製到剪貼簿",
+        });
+      }
+    } catch (err) {
+      console.log('分享失敗:', err);
+    }
+  };
+
+  const handleFacebookShare = () => {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+  };
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div 
@@ -42,6 +70,26 @@ const Hero = () => {
             <Button size="lg" variant="sage" asChild>
               <a href="#programs">探索活動課程</a>
             </Button>
+            <div className="flex gap-2">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="group"
+                onClick={handleFacebookShare}
+              >
+                <Facebook className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                分享
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="group"
+                onClick={handleShare}
+              >
+                <Share2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                分享連結
+              </Button>
+            </div>
           </div>
           
           <div className="flex flex-col md:flex-row gap-6 pt-8 text-sm">
