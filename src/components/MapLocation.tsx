@@ -18,7 +18,7 @@ const MapLocation = () => {
           {/* Map */}
           <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.0678866843344!2d120.16623631496858!3d22.994899284976954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e76a4e9c8f0a3%3A0x3b2b3b3b3b3b3b3b!2z5Y-w5Y2X5biC5a6J5bmz5Y2A5ZyL5bmz6Lev!5e0!3m2!1szh-TW!2stw!4v1234567890123!5m2!1szh-TW!2stw"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1837!2d120.1705112!3d22.9892655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e760f691c8ae7%3A0x739c14b3e29f9ae!2z5L2b5pWZ5oWI5r-f5oWI5ZaE5LqL5qWt5Z-66YeR5pyDIOWuieW5s-iBr-e1oeiZlQ!5e0!3m2!1szh-TW!2stw"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -58,8 +58,7 @@ const MapLocation = () => {
                 <div>
                   <h3 className="font-semibold text-foreground mb-2">服務時間</h3>
                   <p className="text-muted-foreground">
-                    週一至週五：09:00 - 17:00<br />
-                    週末及國定假日：依活動公告
+                    每天：07:00 - 22:00
                   </p>
                 </div>
               </div>
@@ -70,11 +69,11 @@ const MapLocation = () => {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-sage mt-1">•</span>
-                  <span>公車：搭乘2、99路線至「國平國小」站下車，步行約3分鐘</span>
+                  <span>公車：搭乘19路或77路至「國平路口」站下車，步行即可到達（<a href="https://2384.tainan.gov.tw" target="_blank" rel="noopener noreferrer" className="text-sage underline hover:text-sage-dark">查詢公車路線</a>）</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-sage mt-1">•</span>
-                  <span>自行開車：備有停車空間，請提前預約</span>
+                  <span>自行開車：備有停車空間</span>
                 </li>
               </ul>
             </Card>
