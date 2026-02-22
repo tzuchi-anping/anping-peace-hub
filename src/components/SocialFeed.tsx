@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 
 const SocialFeed = () => {
   return (
-    <section id="social-feed" className="py-20 bg-sage-light/10">
+    <section id="social" className="py-20 bg-sage-light/10">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 bg-sage-light/20 px-4 py-2 rounded-full border border-sage-light">
