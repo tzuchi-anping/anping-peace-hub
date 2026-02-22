@@ -8,7 +8,7 @@ const Navigation = () => {
 
   const navItems = [
     { title: "首頁", href: "/" },
-    { title: "新春元宵園遊會", href: "#upcoming-event" },
+    { title: "近期活動", href: "#upcoming-event" },
     { title: "活動課程", href: "#programs" },
     { title: "社群動態", href: "#social" },
     { title: "聯絡我們", href: "#contact" },
