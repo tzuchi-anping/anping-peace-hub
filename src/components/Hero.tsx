@@ -63,7 +63,7 @@ const Hero = () => {
           <div className="flex flex-wrap gap-4 pt-4">
             <Button size="lg" variant="warm" className="group" asChild>
               <a href="#upcoming-event">
-                了解歲末祝福
+                了解近期活動
                 <Heart className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
             </Button>
