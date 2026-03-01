@@ -13,7 +13,7 @@ const Programs = () => {
       image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80",
       links: [
         { type: "website", url: "https://sites.google.com/view/npclassroom-new?pli=1", icon: ExternalLink },
-        { type: "line", url: "https://line.me/ti/p/Seu9bfgJZv", icon: MessageCircle }
+        { type: "line", url: "https://line.me/R/ti/p/@164kyzer", icon: MessageCircle }
       ]
     },
     {
