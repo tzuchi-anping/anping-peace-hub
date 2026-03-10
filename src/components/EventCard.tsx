@@ -1,7 +1,8 @@
-import { Calendar, Clock, Drum, Leaf, Heart, Coins, UtensilsCrossed } from "lucide-react";
+import { Calendar, Clock, Leaf, ExternalLink, Store, UtensilsCrossed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import springFestivalImage from "@/assets/spring-festival-2025.jpg";
+import plantopiaImage from "@/assets/plantopia-20260411.png";
+import kidMarketImage from "@/assets/kid-20260411.jpg";
 
 const EventCard = () => {
   return (
@@ -12,92 +13,112 @@ const EventCard = () => {
             <Calendar className="w-4 h-4 text-warm-amber" />
             <span className="text-sm font-medium text-warm-amber">近期活動</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">新春元宵園遊會</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            新春走春，一起來迎福，把幸福帶回家
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+            植托邦蔬食市集 × 小老闆市集
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            以「蔬食護生、環保永續」為核心，打造蔬食者盡情徜徉的饗食天堂。攜手小老闆市集，讓孩子透過擺攤延續物命、學習規劃與珍惜，大手牽小手一起愛地球。
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
-          <Card className="overflow-hidden border-sage-light/20 shadow-xl">
-            <div className="grid md:grid-cols-2 gap-0">
-              <div
-                className="h-64 md:h-auto bg-cover bg-center"
-                style={{ backgroundImage: `url(${springFestivalImage})` }}
-              />
-
-              <div className="p-8 space-y-6">
-                <p className="text-muted-foreground leading-relaxed">
-                  新春迎福，歡迎闔家一起來走春，感受溫暖與歡喜的氛圍。
-                </p>
-
-                <div className="space-y-4">
-                  <h3 className="font-semibold text-lg flex items-center gap-2 text-sage">
-                    <Heart className="w-5 h-5" />
-                    活動內容
-                  </h3>
-
-                  <div className="grid gap-3">
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-sage-light/10 hover:bg-sage-light/20 transition-colors">
-                      <Drum className="w-5 h-5 text-warm-amber mt-0.5 flex-shrink-0" />
-                      <div>
-                        <span className="font-medium">鼓動大愛</span>
-                        <p className="text-sm text-muted-foreground">以鼓聲傳遞愛與力量</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-sage-light/10 hover:bg-sage-light/20 transition-colors">
-                      <Leaf className="w-5 h-5 text-warm-amber mt-0.5 flex-shrink-0" />
-                      <div>
-                        <span className="font-medium">無痕蔬食市集</span>
-                        <p className="text-sm text-muted-foreground">友善大地的美味蔬食</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 p-3 rounded-lg bg-sage-light/10 hover:bg-sage-light/20 transition-colors">
-                      <Coins className="w-5 h-5 text-warm-amber mt-0.5 flex-shrink-0" />
-                      <div>
-                        <span className="font-medium">共善竹筒歲月初心</span>
-                        <p className="text-sm text-muted-foreground">日存善念，匯聚愛的力量</p>
-                      </div>
-                    </div>
-                  </div>
+        <div className="max-w-5xl mx-auto space-y-6">
+          <Card className="overflow-hidden border-sage-light/20 shadow-lg bg-sage/5">
+            <div className="p-6 md:p-8 space-y-4">
+              <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-base">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-sage" />
+                  <span className="font-bold text-lg">2026 / 04 / 11（六）</span>
                 </div>
-
-                <div className="space-y-3 pt-4">
-                  <div className="flex items-center gap-2 text-sm font-medium text-sage">
-                    <Clock className="w-4 h-4" />
-                    活動時間
-                  </div>
-                  <div className="pl-6 space-y-1">
-                    <p className="font-medium text-foreground">2/28 (六)</p>
-                    <p className="text-sm text-muted-foreground">• 上午 09:00 ~ 下午 13:00</p>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-5 h-5 text-sage" />
+                  <span className="font-bold text-lg">14:00 – 19:00</span>
+                  <span className="text-sm text-muted-foreground">（小老闆市集至 17:00）</span>
                 </div>
-
-                <div className="flex items-start gap-2 p-3 rounded-lg bg-warm-amber/10 text-sm text-muted-foreground">
-                  <UtensilsCrossed className="w-4 h-4 text-warm-amber mt-0.5 flex-shrink-0" />
-                  <span>響應無痕生活，請自備環保餐具、碗筷及杯子</span>
-                </div>
-
-                <Button
-                  variant="warm"
-                  size="lg"
-                  className="w-full group"
-                  asChild
-                >
-                  <a
-                    href="https://www.facebook.com/share/p/1JyHfaL4uY/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    了解更多
-                    <Heart className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  </a>
-                </Button>
+              </div>
+              <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-warm-amber/15 text-warm-amber font-semibold">
+                <UtensilsCrossed className="w-5 h-5 flex-shrink-0" />
+                <span>響應無痕生活，請自備環保餐具、碗筷及杯子</span>
               </div>
             </div>
           </Card>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="overflow-hidden border-sage-light/20 shadow-lg flex flex-col">
+              <div className="aspect-[3/4] overflow-hidden">
+                <img
+                  src={plantopiaImage}
+                  alt="植托邦蔬食市集海報"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6 space-y-4 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <Leaf className="w-5 h-5 text-sage" />
+                  植托邦蔬食市集
+                </h3>
+                <div className="flex flex-col gap-3 mt-auto">
+                  <Button variant="warm" size="lg" className="w-full group" asChild>
+                    <a
+                      href="https://tally.so/r/1AXodW"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Store className="w-4 h-4" />
+                      我要擺攤
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="lg" className="w-full group" asChild>
+                    <a
+                      href="https://www.instagram.com/plantopia2025/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      了解更多
+                      <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="overflow-hidden border-sage-light/20 shadow-lg flex flex-col">
+              <div className="aspect-[3/4] overflow-hidden">
+                <img
+                  src={kidMarketImage}
+                  alt="小老闆市集海報"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6 space-y-4 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold flex items-center gap-2">
+                  <Store className="w-5 h-5 text-warm-amber" />
+                  小老闆市集
+                </h3>
+                <div className="flex flex-col gap-3 mt-auto">
+                  <Button variant="warm" size="lg" className="w-full group" asChild>
+                    <a
+                      href="https://docs.google.com/forms/d/e/1FAIpQLSfw-P_T6gp_9yTjd8iN4AvakCGA4SzFbDaLkAaKYh1M_CiJaA/viewform"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Store className="w-4 h-4" />
+                      我要擺攤
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="lg" className="w-full group" asChild>
+                    <a
+                      href="https://www.facebook.com/share/1DDd8VZjqh/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      了解更多
+                      <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
         </div>
       </div>
     </section>
