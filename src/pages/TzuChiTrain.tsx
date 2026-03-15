@@ -12,11 +12,11 @@ import {
   Sunrise,
   Moon,
   Utensils,
-  Camera,
-  BookOpen,
   Users,
   TreePine,
   Home,
+  Camera,
+  BookOpen,
 } from "lucide-react";
 import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
@@ -27,7 +27,7 @@ import {
 
 const highlights = [
   { icon: BookOpen, label: "走讀大愛足跡" },
-  { icon: Moon, label: "星空交心對話" },
+  { icon: Moon, label: "星空夜語" },
   { icon: Home, label: "體驗靜思家風" },
   { icon: TreePine, label: "專屬寧靜時光" },
 ];
@@ -85,16 +85,12 @@ const schedules: { day: string; date: string; items: ScheduleItem[] }[] = [
   },
 ];
 
-const infoCards = [
-  { icon: Calendar, label: "活動日期", value: TZUCHI_TRAIN_EVENT_DATE, iconColor: "text-sage" },
-  { icon: Clock, label: "報名截止", value: TZUCHI_TRAIN_REGISTRATION_DEADLINE, iconColor: "text-sage" },
-  { icon: MapPin, label: "集合地點", value: "台南火車站前站", iconColor: "text-sage" },
-  { icon: Train, label: "費用", value: "全票 2,800 元", subValue: "半票 1,800 元", iconColor: "text-warm-amber" },
+const infoItems = [
+  { icon: Calendar, label: "活動日期", value: TZUCHI_TRAIN_EVENT_DATE },
+  { icon: Clock, label: "報名截止", value: TZUCHI_TRAIN_REGISTRATION_DEADLINE },
+  { icon: MapPin, label: "集合地點", value: "台南火車站前站" },
+  { icon: Train, label: "費用", value: "全票 2,800 / 半票 1,800 元" },
 ];
-
-const heroBackgroundStyle = {
-  background: `linear-gradient(135deg, hsl(142 35% 45% / 0.08), hsl(28 65% 60% / 0.06)), linear-gradient(to bottom, hsl(var(--background)), hsl(142 30% 95%))`,
-};
 
 const ScheduleTimeline = ({
   items,
@@ -106,45 +102,48 @@ const ScheduleTimeline = ({
   date: string;
 }) => (
   <>
-    <div className="flex items-center gap-3 mb-6">
-      <div className="bg-sage text-primary-foreground px-4 py-2 rounded-full font-bold text-sm">
-        {day}
+    <div className="flex items-baseline gap-4 mb-6 pb-4 border-b border-border/50">
+      <span
+        className="text-4xl font-black text-sage/20 leading-none select-none"
+        style={{ fontFamily: "'Noto Serif TC', serif" }}
+      >
+        {day.split(" ")[1]}
+      </span>
+      <div>
+        <div className="text-xs font-bold tracking-widest text-sage uppercase">{day}</div>
+        <div className="text-base font-semibold text-foreground">{date}</div>
       </div>
-      <span className="text-lg font-semibold text-foreground">{date}</span>
     </div>
+
     <div className="relative">
-      <div className="absolute left-[23px] top-2 bottom-2 w-0.5 bg-sage-light/50" />
+      <div className="absolute left-[19px] top-2 bottom-2 w-px bg-sage-light/40" />
       {items.map((item, index) => {
         const Icon = item.icon;
         return (
-          <div key={index} className="flex items-start gap-4 group relative">
+          <div key={index} className="flex items-start gap-4 group relative mb-1">
             <div
-              className={`relative z-10 flex-shrink-0 w-[48px] h-[48px] rounded-full flex items-center justify-center transition-all ${
+              className={`relative z-10 flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all ${
                 item.highlight
-                  ? "bg-warm-amber text-primary-foreground shadow-md"
-                  : "bg-sage-light/30 text-sage group-hover:bg-sage-light/50"
+                  ? "bg-warm-amber text-white shadow-sm"
+                  : "bg-background border border-sage-light/60 text-sage group-hover:border-sage/60"
               }`}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="w-4 h-4" />
             </div>
-            <div className="flex-1 pb-4 pt-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="font-mono text-sm font-bold text-sage">{item.time}</span>
+            <div className="flex-1 pb-5 pt-1.5">
+              <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                <span className="font-mono text-xs font-bold text-sage tracking-wider">{item.time}</span>
                 {item.duration && (
-                  <span className="text-xs bg-sage-light/30 text-sage-dark px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] bg-sage/8 border border-sage-light/40 text-sage-dark px-1.5 py-0.5 rounded">
                     {item.duration}
                   </span>
                 )}
               </div>
-              <p
-                className={`text-sm mt-0.5 ${
-                  item.highlight ? "font-semibold text-foreground" : "text-muted-foreground"
-                }`}
-              >
+              <p className={`text-sm leading-snug ${item.highlight ? "font-semibold text-foreground" : "text-muted-foreground"}`}>
                 {item.title}
               </p>
               {item.description && (
-                <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed border-l-2 border-sage-light/50 pl-2">
+                <p className="text-xs text-muted-foreground/80 mt-2 leading-relaxed pl-3 border-l border-sage-light/60 italic">
                   {item.description}
                 </p>
               )}
@@ -161,107 +160,104 @@ const TzuChiTrain = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0" style={heroBackgroundStyle} />
-        <div className="absolute top-20 right-10 w-32 h-32 bg-sage/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-40 h-40 bg-warm-amber/5 rounded-full blur-3xl" />
+      {/* ── Hero: editorial split layout ── */}
+      <section className="relative overflow-hidden bg-background">
+        {/* Subtle background aura */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-[60%] h-full bg-gradient-to-br from-sage/5 via-transparent to-transparent" />
+          <div className="absolute bottom-0 right-0 w-[50%] h-[60%] bg-gradient-to-tl from-warm-amber/4 via-transparent to-transparent" />
+        </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
-            <div className="inline-flex items-center gap-2 bg-sage-light/20 backdrop-blur-sm px-4 py-2 rounded-full border border-sage-light">
-              <Train className="w-4 h-4 text-sage" />
-              <span className="text-sm font-medium text-foreground">
-                給心放個假，踏上尋根之旅
-              </span>
-            </div>
+          <div className="min-h-[80vh] flex items-center">
+            <div className="w-full grid md:grid-cols-2 gap-8 md:gap-16 items-center py-16 md:py-24">
 
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-              2026 安平聯區
-              <span className="block text-sage">慈濟列車</span>
-            </h1>
+              {/* Left: Text */}
+              <div className="space-y-8">
+                <div className="animate-fade-in">
+                  <span className="section-eyebrow">2026 安平聯區 · 兩天一夜</span>
+                </div>
 
-            <p className="text-2xl md:text-3xl font-bold text-warm-amber">
-              花蓮「心」履行
-            </p>
+                <div className="animate-fade-in-delay-1 space-y-3">
+                  <h1
+                    className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight"
+                  >
+                    慈濟列車
+                  </h1>
+                  <p className="text-2xl md:text-3xl font-bold text-warm-amber tracking-wide">
+                    花蓮「心」履行
+                  </p>
+                </div>
 
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              遠離塵世的喧囂，放慢匆忙的腳步。
-              <br />
-              邀請您搭上這班滿載溫暖的列車，回到「心靈的故鄉」——花蓮，
-              <br />
-              感受最純粹的平靜與感動。
-            </p>
+                <p className="text-muted-foreground leading-relaxed text-base md:text-lg max-w-md animate-fade-in-delay-2">
+                  遠離塵世的喧囂，放慢匆忙的腳步。邀請您搭上這班滿載溫暖的列車，回到「心靈的故鄉」——花蓮，感受最純粹的平靜與感動。
+                </p>
 
-            <div className="flex flex-wrap justify-center gap-4 pt-4">
-              <Button size="lg" variant="warm" className="group text-lg px-8" asChild>
-                <a href={TZUCHI_TRAIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
-                  <Heart className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  立即報名
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <a href="#schedule">
-                  <Clock className="w-4 h-4" />
-                  查看行程
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+                <div className="flex flex-wrap gap-3 animate-fade-in-delay-3">
+                  <Button size="lg" variant="warm" className="group px-8" asChild>
+                    <a href={TZUCHI_TRAIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
+                      <Heart className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      立即報名
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <a href="#schedule">
+                      <Clock className="w-4 h-4" />
+                      查看行程
+                    </a>
+                  </Button>
+                </div>
 
-      {/* Poster */}
-      <section className="py-12 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <Card className="overflow-hidden border-sage-light/20 shadow-xl">
-              <img
-                src={posterImage}
-                alt="2026 安平聯區慈濟列車海報"
-                className="w-full h-auto"
-              />
-            </Card>
-          </div>
-        </div>
-      </section>
+                {/* Quick info strip */}
+                <div className="grid grid-cols-2 gap-3 pt-2 animate-fade-in-delay-3">
+                  {infoItems.map(({ icon: Icon, label, value }) => (
+                    <div key={label} className="flex items-start gap-2.5">
+                      <Icon className="w-4 h-4 text-sage flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-[10px] text-muted-foreground/70 uppercase tracking-wide">{label}</div>
+                        <div className="text-sm font-medium text-foreground">{value}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-      {/* Event Info Cards */}
-      <section className="py-16 bg-gradient-to-b from-sage-light/10 to-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {infoCards.map(({ icon: Icon, label, value, subValue, iconColor }) => (
-                <Card key={label} className="p-6 text-center border-sage-light/20 hover:shadow-lg transition-shadow">
-                  <Icon className={`w-8 h-8 ${iconColor} mx-auto mb-3`} />
-                  <p className="text-sm text-muted-foreground">{label}</p>
-                  <p className="font-bold text-foreground mt-1">{value}</p>
-                  {subValue && <p className="text-sm text-muted-foreground">{subValue}</p>}
-                </Card>
-              ))}
+              {/* Right: Poster */}
+              <div className="animate-fade-in-delay-2">
+                <div className="relative max-w-sm mx-auto md:mx-0 md:ml-auto">
+                  {/* Decorative shadow/glow behind poster */}
+                  <div className="absolute -inset-4 bg-gradient-to-br from-sage/10 to-warm-amber/10 rounded-3xl blur-2xl" />
+                  <Card className="relative overflow-hidden border-sage-light/30 shadow-2xl rounded-2xl">
+                    <img
+                      src={posterImage}
+                      alt="2026 安平聯區慈濟列車海報"
+                      className="w-full h-auto"
+                      loading="lazy"
+                    />
+                  </Card>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* Highlights */}
-      <section className="py-16 bg-background">
+      {/* ── Highlights ── */}
+      <section className="py-14 border-y border-border/40 bg-sage/3">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              四大心靈亮點
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-border/40">
               {highlights.map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-sage-light/10 hover:bg-sage-light/20 transition-all hover:-translate-y-1"
+                  className="flex flex-col items-center gap-3 px-6 py-8 group hover:bg-sage/5 transition-colors"
                 >
-                  <div className="w-16 h-16 rounded-full bg-sage/10 flex items-center justify-center group-hover:bg-sage/20 transition-colors">
-                    <Icon className="w-8 h-8 text-sage" />
+                  <div className="w-12 h-12 rounded-full border border-sage-light/50 flex items-center justify-center group-hover:border-sage/60 group-hover:bg-sage/8 transition-all">
+                    <Icon className="w-5 h-5 text-sage" />
                   </div>
-                  <span className="font-semibold text-foreground">{label}</span>
+                  <span className="text-sm font-semibold text-foreground text-center">{label}</span>
                 </div>
               ))}
             </div>
@@ -269,41 +265,37 @@ const TzuChiTrain = () => {
         </div>
       </section>
 
-      {/* Schedule */}
-      <section id="schedule" className="py-16 bg-gradient-to-b from-background to-sage-light/10">
+      {/* ── Schedule ── */}
+      <section id="schedule" className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="text-center space-y-4">
-              <div className="inline-flex items-center gap-2 bg-warm-amber/10 px-4 py-2 rounded-full">
-                <Calendar className="w-4 h-4 text-warm-amber" />
-                <span className="text-sm font-medium text-warm-amber">行程表</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                兩天一夜心靈之旅
-              </h2>
-              <p className="text-muted-foreground">
-                從台南出發，搭乘自強號前往花蓮，展開一段充滿感動的旅程
-              </p>
+          <div className="max-w-5xl mx-auto space-y-10">
+
+            {/* Section header */}
+            <div className="text-center space-y-3">
+              <span className="section-eyebrow">行程表</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">兩天一夜心靈之旅</h2>
+              <p className="text-muted-foreground">從台南出發，搭乘自強號前往花蓮，展開一段充滿感動的旅程</p>
             </div>
 
-            <Card className="overflow-hidden border-sage-light/20 shadow-md bg-sage/5">
-              <div className="p-4 md:p-6 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
-                <div className="flex items-center gap-2">
-                  <Train className="w-5 h-5 text-sage" />
-                  <span className="font-semibold">去程：自強301車次</span>
-                  <span className="text-muted-foreground">06:30 台南 → 10:59 花蓮</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Train className="w-5 h-5 text-warm-amber" />
-                  <span className="font-semibold">回程：自強324車次</span>
-                  <span className="text-muted-foreground">16:01 花蓮 → 台南</span>
-                </div>
+            {/* Train info bar */}
+            <div className="flex flex-wrap justify-center gap-6 text-sm py-4 px-6 bg-sage/5 border border-sage-light/30 rounded-xl">
+              <div className="flex items-center gap-2">
+                <Train className="w-4 h-4 text-sage" />
+                <span className="font-semibold">去程 自強301</span>
+                <span className="text-muted-foreground">06:30 台南 → 10:59 花蓮</span>
               </div>
-            </Card>
+              <div className="w-px bg-border/50 hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <Train className="w-4 h-4 text-warm-amber" />
+                <span className="font-semibold">回程 自強324</span>
+                <span className="text-muted-foreground">16:01 花蓮 → 台南</span>
+              </div>
+            </div>
 
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+            {/* Day cards */}
+            <div className="grid md:grid-cols-2 gap-8">
               {schedules.map((schedule) => (
-                <Card key={schedule.day} className="p-6 md:p-8 border-sage-light/20 shadow-sm">
+                <Card key={schedule.day} className="p-6 md:p-8 border-sage-light/20 shadow-sm hover:shadow-md transition-shadow">
                   <ScheduleTimeline items={schedule.items} day={schedule.day} date={schedule.date} />
                 </Card>
               ))}
@@ -312,47 +304,37 @@ const TzuChiTrain = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* ── CTA ── */}
       <section className="py-20 bg-gradient-to-b from-sage-light/10 to-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
+          <div className="max-w-2xl mx-auto text-center space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               「心」的旅程，從這裡開始
             </h2>
-            <p className="text-lg text-muted-foreground">
-              期待與您同遊！名額有限，請把握機會報名。
-            </p>
-            <Button size="lg" variant="warm" className="group text-lg px-10 py-6" asChild>
+            <p className="text-muted-foreground">名額有限，請把握機會報名。報名截止：2026 年 5 月 10 日或額滿截止。</p>
+            <Button size="lg" variant="warm" className="group text-base px-10" asChild>
               <a href={TZUCHI_TRAIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
-                <Heart className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Heart className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 立即報名
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </Button>
-            <p className="text-sm text-muted-foreground">
-              報名截止日：2026 年 5 月 10 日，額滿提前截止
-            </p>
           </div>
         </div>
       </section>
 
       <Footer />
 
-      {/* Floating Registration Button */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <Button
-          variant="warm"
-          size="lg"
-          className="shadow-2xl hover:shadow-warm group"
-          asChild
-        >
+      {/* Floating button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button variant="warm" size="lg" className="shadow-2xl group" asChild>
           <a
             href={TZUCHI_TRAIN_REGISTRATION_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2"
           >
-            <Train className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            <Train className="w-4 h-4 group-hover:scale-110 transition-transform" />
             立即報名
           </a>
         </Button>

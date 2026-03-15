@@ -6,11 +6,8 @@ const SocialFeed = () => {
     <section id="social" className="py-20 bg-sage-light/10">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 bg-sage-light/20 px-4 py-2 rounded-full border border-sage-light">
-            <Sprout className="w-4 h-4 text-sage" />
-            <span className="text-sm font-medium text-sage">最新動態</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">社群分享</h2>
+          <span className="section-eyebrow">最新動態</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-3">社群分享</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             最新活動花絮與精彩瞬間
           </p>
