@@ -1,25 +1,26 @@
 import { useState, useEffect, useRef } from "react";
+import {
+  TZUCHI_TRAIN_REGISTRATION_DEADLINE_ISO,
+  TZUCHI_TRAIN_DEPARTURE_ISO,
+} from "@/lib/constants";
 
 interface TimeLeft {
   days: number;
   hours: number;
   minutes: number;
-  seconds: number;
   expired: boolean;
 }
 
-// ISO 8601 with +08:00 guarantees correct UTC+8 regardless of browser timezone
-const REGISTRATION_DEADLINE = new Date("2026-05-10T23:59:59+08:00");
-const DEPARTURE_DATE = new Date("2026-06-27T06:00:00+08:00");
+const REGISTRATION_DEADLINE = new Date(TZUCHI_TRAIN_REGISTRATION_DEADLINE_ISO);
+const DEPARTURE_DATE = new Date(TZUCHI_TRAIN_DEPARTURE_ISO);
 
 function calcTimeLeft(target: Date): TimeLeft {
   const diff = target.getTime() - Date.now();
-  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, expired: true };
   return {
     days: Math.floor(diff / 86_400_000),
     hours: Math.floor((diff / 3_600_000) % 24),
     minutes: Math.floor((diff / 60_000) % 60),
-    seconds: Math.floor((diff / 1_000) % 60),
     expired: false,
   };
 }

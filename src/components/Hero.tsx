@@ -75,7 +75,7 @@ const Hero = () => {
           </div>
 
           {/* Info strip */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 text-sm text-muted-foreground animate-fade-in-delay-3 border-t border-border/40 pt-6">
+          <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground animate-fade-in-delay-3 border-t border-border/40 pt-6">
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-sage flex-shrink-0" />
               <span>台南市安平區國平路211號</span>

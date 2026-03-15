@@ -15,7 +15,6 @@ import {
   Users,
   TreePine,
   Home,
-  Camera,
   BookOpen,
 } from "lucide-react";
 import CountdownTimer from "@/components/CountdownTimer";

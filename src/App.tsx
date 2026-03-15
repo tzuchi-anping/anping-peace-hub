@@ -20,7 +20,7 @@ const ScrollToHash = () => {
       }, 80);
       return () => clearTimeout(timer);
     } else {
-      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [hash, pathname]);
   return null;
