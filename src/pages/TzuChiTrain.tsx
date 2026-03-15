@@ -20,6 +20,12 @@ import {
   Home,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+const posterImage = "/tzuchi-train-2026.jpg";
+import {
+  TZUCHI_TRAIN_REGISTRATION_URL,
+  TZUCHI_TRAIN_EVENT_DATE,
+  TZUCHI_TRAIN_REGISTRATION_DEADLINE,
+} from "@/lib/constants";
 
 const highlights = [
   { icon: BookOpen, label: "走讀大愛足跡" },
@@ -36,32 +42,52 @@ interface ScheduleItem {
   highlight?: boolean;
 }
 
-const day1Schedule: ScheduleItem[] = [
-  { time: "05:30", title: "台南火車站前站集合", icon: MapPin, highlight: true },
-  { time: "06:30", title: "出發", icon: Train },
-  { time: "10:59", title: "抵達花蓮（自強301車次）", icon: Train, highlight: true },
-  { time: "11:20", title: "花蓮靜思堂", icon: Home },
-  { time: "11:40", title: "放置行李、入座齋堂", icon: Home },
-  { time: "12:00", title: "午齋、養息、集合", icon: Utensils, duration: "90 分鐘" },
-  { time: "13:30", title: "花蓮靜思堂巡禮：慈濟博覽會", icon: Camera, duration: "90 分鐘" },
-  { time: "15:00", title: "慈濟醫院參訪", icon: Heart, duration: "90 分鐘" },
-  { time: "16:30", title: "慈濟大學參訪", icon: BookOpen, duration: "90 分鐘" },
-  { time: "18:00", title: "藥石", icon: Utensils },
-  { time: "19:00", title: "知心相契", icon: Users },
-  { time: "20:00", title: "安單、盥洗、安板", icon: Moon },
+const schedules: { day: string; date: string; items: ScheduleItem[] }[] = [
+  {
+    day: "DAY 1",
+    date: "6月27日（六）",
+    items: [
+      { time: "05:30", title: "台南火車站前站集合", icon: MapPin, highlight: true },
+      { time: "06:30", title: "出發", icon: Train },
+      { time: "10:59", title: "抵達花蓮（自強301車次）", icon: Train, highlight: true },
+      { time: "11:20", title: "花蓮靜思堂", icon: Home },
+      { time: "11:40", title: "放置行李、入座齋堂", icon: Home },
+      { time: "12:00", title: "午齋、養息、集合", icon: Utensils, duration: "90 分鐘" },
+      { time: "13:30", title: "花蓮靜思堂巡禮：慈濟博覽會", icon: Camera, duration: "90 分鐘" },
+      { time: "15:00", title: "慈濟醫院參訪", icon: Heart, duration: "90 分鐘" },
+      { time: "16:30", title: "慈濟大學參訪", icon: BookOpen, duration: "90 分鐘" },
+      { time: "18:00", title: "藥石", icon: Utensils },
+      { time: "19:00", title: "知心相契", icon: Users },
+      { time: "20:00", title: "安單、盥洗、安板", icon: Moon },
+    ],
+  },
+  {
+    day: "DAY 2",
+    date: "6月28日（日）",
+    items: [
+      { time: "06:00", title: "晨鐘～身心淨行", icon: Sunrise },
+      { time: "07:00", title: "早齋", icon: Utensils, duration: "50 分鐘" },
+      { time: "08:00", title: "發車前往精舍", icon: Train, highlight: true },
+      { time: "08:30", title: "分站活動：精舍巡禮、自力耕生園區參訪、故事屋", icon: Camera, duration: "210 分鐘" },
+      { time: "12:00", title: "午齋養息", icon: Utensils },
+      { time: "13:00", title: "自由活動時間", icon: TreePine },
+      { time: "13:30", title: "參訪書軒本店", icon: BookOpen },
+      { time: "15:00", title: "發車前往花蓮火車站", icon: Train },
+      { time: "16:01", title: "返家（自強324車次）法喜賦歸", icon: Train, highlight: true },
+    ],
+  },
 ];
 
-const day2Schedule: ScheduleItem[] = [
-  { time: "06:00", title: "晨鐘～身心淨行", icon: Sunrise },
-  { time: "07:00", title: "早齋", icon: Utensils, duration: "50 分鐘" },
-  { time: "08:00", title: "發車前往精舍", icon: Train, highlight: true },
-  { time: "08:30", title: "分站活動：精舍巡禮、自力耕生園區參訪、故事屋", icon: Camera, duration: "210 分鐘" },
-  { time: "12:00", title: "午齋養息", icon: Utensils },
-  { time: "13:00", title: "自由活動時間", icon: TreePine },
-  { time: "13:30", title: "參訪書軒本店", icon: BookOpen },
-  { time: "15:00", title: "發車前往花蓮火車站", icon: Train },
-  { time: "16:01", title: "返家（自強324車次）法喜賦歸", icon: Train, highlight: true },
+const infoCards = [
+  { icon: Calendar, label: "活動日期", value: TZUCHI_TRAIN_EVENT_DATE, iconColor: "text-sage" },
+  { icon: Clock, label: "報名截止", value: TZUCHI_TRAIN_REGISTRATION_DEADLINE, iconColor: "text-sage" },
+  { icon: MapPin, label: "集合地點", value: "台南火車站前站", iconColor: "text-sage" },
+  { icon: Train, label: "費用", value: "全票 2,800 元", subValue: "半票 1,800 元", iconColor: "text-warm-amber" },
 ];
+
+const heroBackgroundStyle = {
+  background: `linear-gradient(135deg, hsl(142 35% 45% / 0.08), hsl(28 65% 60% / 0.06)), linear-gradient(to bottom, hsl(var(--background)), hsl(142 30% 95%))`,
+};
 
 const ScheduleTimeline = ({
   items,
@@ -72,7 +98,7 @@ const ScheduleTimeline = ({
   day: string;
   date: string;
 }) => (
-  <div className="space-y-0">
+  <>
     <div className="flex items-center gap-3 mb-6">
       <div className="bg-sage text-primary-foreground px-4 py-2 rounded-full font-bold text-sm">
         {day}
@@ -80,47 +106,42 @@ const ScheduleTimeline = ({
       <span className="text-lg font-semibold text-foreground">{date}</span>
     </div>
     <div className="relative">
-      {/* Timeline line */}
       <div className="absolute left-[23px] top-2 bottom-2 w-0.5 bg-sage-light/50" />
-      <div className="space-y-1">
-        {items.map((item, index) => {
-          const Icon = item.icon;
-          return (
-            <div key={index} className="flex items-start gap-4 group relative">
-              {/* Timeline dot */}
-              <div
-                className={`relative z-10 flex-shrink-0 w-[48px] h-[48px] rounded-full flex items-center justify-center transition-all ${
-                  item.highlight
-                    ? "bg-warm-amber text-primary-foreground shadow-md"
-                    : "bg-sage-light/30 text-sage group-hover:bg-sage-light/50"
+      {items.map((item, index) => {
+        const Icon = item.icon;
+        return (
+          <div key={index} className="flex items-start gap-4 group relative">
+            <div
+              className={`relative z-10 flex-shrink-0 w-[48px] h-[48px] rounded-full flex items-center justify-center transition-all ${
+                item.highlight
+                  ? "bg-warm-amber text-primary-foreground shadow-md"
+                  : "bg-sage-light/30 text-sage group-hover:bg-sage-light/50"
+              }`}
+            >
+              <Icon className="w-5 h-5" />
+            </div>
+            <div className="flex-1 pb-4 pt-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-sm font-bold text-sage">{item.time}</span>
+                {item.duration && (
+                  <span className="text-xs bg-sage-light/30 text-sage-dark px-2 py-0.5 rounded-full">
+                    {item.duration}
+                  </span>
+                )}
+              </div>
+              <p
+                className={`text-sm mt-0.5 ${
+                  item.highlight ? "font-semibold text-foreground" : "text-muted-foreground"
                 }`}
               >
-                <Icon className="w-5 h-5" />
-              </div>
-              {/* Content */}
-              <div className="flex-1 pb-4 pt-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-sm font-bold text-sage">{item.time}</span>
-                  {item.duration && (
-                    <span className="text-xs bg-sage-light/30 text-sage-dark px-2 py-0.5 rounded-full">
-                      {item.duration}
-                    </span>
-                  )}
-                </div>
-                <p
-                  className={`text-sm mt-0.5 ${
-                    item.highlight ? "font-semibold text-foreground" : "text-muted-foreground"
-                  }`}
-                >
-                  {item.title}
-                </p>
-              </div>
+                {item.title}
+              </p>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
-  </div>
+  </>
 );
 
 const TzuChiTrain = () => {
@@ -130,13 +151,7 @@ const TzuChiTrain = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center overflow-hidden">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            background: `linear-gradient(135deg, hsl(142 35% 45% / 0.08), hsl(28 65% 60% / 0.06)), linear-gradient(to bottom, hsl(var(--background)), hsl(142 30% 95%))`,
-          }}
-        />
-        {/* Decorative elements */}
+        <div className="absolute inset-0 z-0" style={heroBackgroundStyle} />
         <div className="absolute top-20 right-10 w-32 h-32 bg-sage/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-40 h-40 bg-warm-amber/5 rounded-full blur-3xl" />
 
@@ -176,11 +191,7 @@ const TzuChiTrain = () => {
 
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Button size="lg" variant="warm" className="group text-lg px-8" asChild>
-                <a
-                  href="https://tzuchi-train-registration.tzuchi-tainan.cc/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={TZUCHI_TRAIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
                   <Heart className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   立即報名
                   <ExternalLink className="w-4 h-4" />
@@ -197,32 +208,34 @@ const TzuChiTrain = () => {
         </div>
       </section>
 
+      {/* Poster */}
+      <section className="py-12 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <Card className="overflow-hidden border-sage-light/20 shadow-xl">
+              <img
+                src={posterImage}
+                alt="2026 安平聯區慈濟列車海報"
+                className="w-full h-auto"
+              />
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Event Info Cards */}
       <section className="py-16 bg-gradient-to-b from-sage-light/10 to-background">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Card className="p-6 text-center border-sage-light/20 hover:shadow-lg transition-shadow">
-                <Calendar className="w-8 h-8 text-sage mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground">活動日期</p>
-                <p className="font-bold text-foreground mt-1">6/27（六）~ 6/28（日）</p>
-              </Card>
-              <Card className="p-6 text-center border-sage-light/20 hover:shadow-lg transition-shadow">
-                <Clock className="w-8 h-8 text-sage mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground">報名截止</p>
-                <p className="font-bold text-foreground mt-1">5/10 或額滿為止</p>
-              </Card>
-              <Card className="p-6 text-center border-sage-light/20 hover:shadow-lg transition-shadow">
-                <MapPin className="w-8 h-8 text-sage mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground">集合地點</p>
-                <p className="font-bold text-foreground mt-1">台南火車站前站</p>
-              </Card>
-              <Card className="p-6 text-center border-sage-light/20 hover:shadow-lg transition-shadow">
-                <Train className="w-8 h-8 text-warm-amber mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground">費用</p>
-                <p className="font-bold text-foreground mt-1">全票 2,800 元</p>
-                <p className="text-sm text-muted-foreground">半票 1,800 元</p>
-              </Card>
+              {infoCards.map(({ icon: Icon, label, value, subValue, iconColor }) => (
+                <Card key={label} className="p-6 text-center border-sage-light/20 hover:shadow-lg transition-shadow">
+                  <Icon className={`w-8 h-8 ${iconColor} mx-auto mb-3`} />
+                  <p className="text-sm text-muted-foreground">{label}</p>
+                  <p className="font-bold text-foreground mt-1">{value}</p>
+                  {subValue && <p className="text-sm text-muted-foreground">{subValue}</p>}
+                </Card>
+              ))}
             </div>
           </div>
         </div>
@@ -269,7 +282,6 @@ const TzuChiTrain = () => {
               </p>
             </div>
 
-            {/* Train info banner */}
             <Card className="overflow-hidden border-sage-light/20 shadow-md bg-sage/5">
               <div className="p-4 md:p-6 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
                 <div className="flex items-center gap-2">
@@ -286,12 +298,11 @@ const TzuChiTrain = () => {
             </Card>
 
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-              <Card className="p-6 md:p-8 border-sage-light/20 shadow-sm">
-                <ScheduleTimeline items={day1Schedule} day="DAY 1" date="6月27日（六）" />
-              </Card>
-              <Card className="p-6 md:p-8 border-sage-light/20 shadow-sm">
-                <ScheduleTimeline items={day2Schedule} day="DAY 2" date="6月28日（日）" />
-              </Card>
+              {schedules.map((schedule) => (
+                <Card key={schedule.day} className="p-6 md:p-8 border-sage-light/20 shadow-sm">
+                  <ScheduleTimeline items={schedule.items} day={schedule.day} date={schedule.date} />
+                </Card>
+              ))}
             </div>
           </div>
         </div>
@@ -307,19 +318,13 @@ const TzuChiTrain = () => {
             <p className="text-lg text-muted-foreground">
               期待與您同遊！名額有限，請把握機會報名。
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" variant="warm" className="group text-lg px-10 py-6" asChild>
-                <a
-                  href="https://tzuchi-train-registration.tzuchi-tainan.cc/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Heart className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  立即報名
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
-            </div>
+            <Button size="lg" variant="warm" className="group text-lg px-10 py-6" asChild>
+              <a href={TZUCHI_TRAIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
+                <Heart className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                立即報名
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </Button>
             <p className="text-sm text-muted-foreground">
               報名截止日：2026 年 5 月 10 日，額滿提前截止
             </p>

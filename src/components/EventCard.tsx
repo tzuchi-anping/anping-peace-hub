@@ -2,6 +2,11 @@ import { Calendar, Clock, Leaf, ExternalLink, Store, UtensilsCrossed, Train, Hea
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import {
+  TZUCHI_TRAIN_REGISTRATION_URL,
+  TZUCHI_TRAIN_EVENT_DATE,
+  TZUCHI_TRAIN_REGISTRATION_DEADLINE,
+} from "@/lib/constants";
 import plantopiaImage from "@/assets/plantopia-20260411.png";
 import kidMarketImage from "@/assets/kid-20260411.jpg";
 
@@ -42,18 +47,18 @@ const EventCard = () => {
                 <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    6/27（六）~ 6/28（日）
+                    {TZUCHI_TRAIN_EVENT_DATE}
                   </span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
-                    報名至 5/10 或額滿截止
+                    {TZUCHI_TRAIN_REGISTRATION_DEADLINE}
                   </span>
                 </div>
               </div>
               <div className="flex flex-col gap-3">
                 <Button variant="warm" size="lg" className="group" asChild>
                   <a
-                    href="https://tzuchi-train-registration.tzuchi-tainan.cc/"
+                    href={TZUCHI_TRAIN_REGISTRATION_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
