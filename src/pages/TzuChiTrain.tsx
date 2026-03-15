@@ -20,7 +20,7 @@ import {
   Home,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-const posterImage = "/tzuchi-train-2026.jpg";
+import posterImage from "@/assets/tzuchi-train-2026.jpg.png";
 import {
   TZUCHI_TRAIN_REGISTRATION_URL,
   TZUCHI_TRAIN_EVENT_DATE,
@@ -333,6 +333,26 @@ const TzuChiTrain = () => {
       </section>
 
       <Footer />
+
+      {/* Floating Registration Button */}
+      <div className="fixed bottom-8 right-8 z-50">
+        <Button
+          variant="warm"
+          size="lg"
+          className="shadow-2xl hover:shadow-warm group"
+          asChild
+        >
+          <a
+            href={TZUCHI_TRAIN_REGISTRATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2"
+          >
+            <Train className="w-5 h-5 group-hover:scale-110 transition-transform" />
+            立即報名
+          </a>
+        </Button>
+      </div>
     </div>
   );
 };

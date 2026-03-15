@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import TzuChiTrainBanner from "@/components/TzuChiTrainBanner";
 import EventCard from "@/components/EventCard";
 import Programs from "@/components/Programs";
 import SocialFeed from "@/components/SocialFeed";
@@ -12,6 +13,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <Hero />
+      <TzuChiTrainBanner />
       <EventCard />
       <Programs />
       <SocialFeed />
