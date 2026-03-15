@@ -1,6 +1,7 @@
-import { Calendar, Clock, Leaf, ExternalLink, Store, UtensilsCrossed } from "lucide-react";
+import { Calendar, Clock, Leaf, ExternalLink, Store, UtensilsCrossed, Train, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import plantopiaImage from "@/assets/plantopia-20260411.png";
 import kidMarketImage from "@/assets/kid-20260411.jpg";
 
@@ -19,6 +20,56 @@ const EventCard = () => {
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             以「蔬食護生、環保永續」為核心，打造蔬食者盡情徜徉的饗食天堂。攜手小老闆市集，讓孩子透過擺攤延續物命、學習規劃與珍惜，大手牽小手一起愛地球。
           </p>
+        </div>
+
+        {/* Tzu Chi Train Banner */}
+        <div className="max-w-5xl mx-auto mb-12">
+          <Card className="overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5">
+            <div className="p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-sage/10 flex items-center justify-center">
+                  <Train className="w-10 h-10 text-sage" />
+                </div>
+              </div>
+              <div className="flex-1 text-center md:text-left space-y-2">
+                <div className="inline-flex items-center gap-2 bg-warm-amber/10 px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium text-warm-amber">熱烈報名中</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+                  2026 安平聯區慈濟列車
+                </h3>
+                <p className="text-lg text-sage font-semibold">花蓮「心」履行 — 兩天一夜心靈之旅</p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    6/27（六）~ 6/28（日）
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    報名至 5/10 或額滿截止
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <Button variant="warm" size="lg" className="group" asChild>
+                  <a
+                    href="https://tzuchi-train-registration.tzuchi-tainan.cc/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Heart className="w-4 h-4" />
+                    立即報名
+                  </a>
+                </Button>
+                <Button variant="outline" size="lg" className="group" asChild>
+                  <Link to="/tzuchi-train">
+                    了解更多
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </Card>
         </div>
 
         <div className="max-w-5xl mx-auto space-y-6">
