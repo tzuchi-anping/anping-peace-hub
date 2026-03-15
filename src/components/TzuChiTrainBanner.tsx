@@ -2,7 +2,7 @@ import { Calendar, Clock, Train, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import posterImage from "@/assets/tzuchi-train-2026.jpg.png";
+import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
   TZUCHI_TRAIN_REGISTRATION_URL,
   TZUCHI_TRAIN_EVENT_DATE,
