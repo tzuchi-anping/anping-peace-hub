@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Train } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NavLink } from "@/components/NavLink";
+import { Link } from "react-router-dom";
 
 const navItems = [
   { title: "首頁", href: "/" },
-  { title: "近期活動", href: "#upcoming-event" },
-  { title: "活動課程", href: "#programs" },
-  { title: "社群動態", href: "#social" },
-  { title: "聯絡我們", href: "#contact" },
+  { title: "近期活動", href: "/#upcoming-event" },
+  { title: "活動課程", href: "/#programs" },
+  { title: "社群動態", href: "/#social" },
+  { title: "聯絡我們", href: "/#contact" },
 ];
 
 const Navigation = () => {
@@ -22,7 +22,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <a href="/" className="group flex items-center gap-2.5">
+          <Link to="/" className="group flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-full bg-sage/15 flex items-center justify-center group-hover:bg-sage/25 transition-colors">
               <span className="text-sage text-xs font-bold" style={{ fontFamily: "'Noto Serif TC', serif" }}>慈</span>
             </div>
@@ -32,7 +32,7 @@ const Navigation = () => {
             >
               慈濟安平聯絡處
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
@@ -45,6 +45,15 @@ const Navigation = () => {
                 {item.title}
               </a>
             ))}
+
+            {/* 慈濟列車 — highlighted nav item */}
+            <Link
+              to="/tzuchi-train"
+              className="ml-1 flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-warm-amber hover:text-warm-amber/80 hover:bg-warm-amber/8 rounded-md transition-all border border-warm-amber/25 hover:border-warm-amber/50"
+            >
+              <Train className="w-3.5 h-3.5" />
+              慈濟列車
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -71,6 +80,14 @@ const Navigation = () => {
                 {item.title}
               </a>
             ))}
+            <Link
+              to="/tzuchi-train"
+              className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-warm-amber hover:bg-warm-amber/8 rounded-md transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              <Train className="w-4 h-4" />
+              慈濟列車
+            </Link>
           </div>
         )}
       </div>

@@ -132,18 +132,18 @@ const ScheduleTimeline = ({
             </div>
             <div className="flex-1 pb-5 pt-1.5">
               <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                <span className="font-mono text-xs font-bold text-sage tracking-wider">{item.time}</span>
+                <span className="font-mono text-sm font-bold text-sage tracking-wider">{item.time}</span>
                 {item.duration && (
-                  <span className="text-[10px] bg-sage/8 border border-sage-light/40 text-sage-dark px-1.5 py-0.5 rounded">
+                  <span className="text-xs bg-sage/8 border border-sage-light/40 text-sage-dark px-1.5 py-0.5 rounded">
                     {item.duration}
                   </span>
                 )}
               </div>
-              <p className={`text-sm leading-snug ${item.highlight ? "font-semibold text-foreground" : "text-muted-foreground"}`}>
+              <p className={`text-base leading-snug ${item.highlight ? "font-semibold text-foreground" : "text-muted-foreground"}`}>
                 {item.title}
               </p>
               {item.description && (
-                <p className="text-xs text-muted-foreground/80 mt-2 leading-relaxed pl-3 border-l border-sage-light/60 italic">
+                <p className="text-sm text-muted-foreground/80 mt-2 leading-relaxed pl-3 border-l border-sage-light/60 italic">
                   {item.description}
                 </p>
               )}
@@ -189,7 +189,7 @@ const TzuChiTrain = () => {
                   </p>
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed text-base md:text-lg max-w-md animate-fade-in-delay-2">
+                <p className="text-muted-foreground leading-relaxed text-lg md:text-xl max-w-md animate-fade-in-delay-2">
                   遠離塵世的喧囂，放慢匆忙的腳步。邀請您搭上這班滿載溫暖的列車，回到「心靈的故鄉」——花蓮，感受最純粹的平靜與感動。
                 </p>
 
@@ -213,10 +213,10 @@ const TzuChiTrain = () => {
                 <div className="grid grid-cols-2 gap-3 pt-2 animate-fade-in-delay-3">
                   {infoItems.map(({ icon: Icon, label, value }) => (
                     <div key={label} className="flex items-start gap-2.5">
-                      <Icon className="w-4 h-4 text-sage flex-shrink-0 mt-0.5" />
+                      <Icon className="w-4 h-4 text-sage flex-shrink-0 mt-1" />
                       <div>
-                        <div className="text-[10px] text-muted-foreground/70 uppercase tracking-wide">{label}</div>
-                        <div className="text-sm font-medium text-foreground">{value}</div>
+                        <div className="text-xs text-muted-foreground/70 uppercase tracking-wide">{label}</div>
+                        <div className="text-base font-medium text-foreground">{value}</div>
                       </div>
                     </div>
                   ))}
@@ -257,7 +257,7 @@ const TzuChiTrain = () => {
                   <div className="w-12 h-12 rounded-full border border-sage-light/50 flex items-center justify-center group-hover:border-sage/60 group-hover:bg-sage/8 transition-all">
                     <Icon className="w-5 h-5 text-sage" />
                   </div>
-                  <span className="text-sm font-semibold text-foreground text-center">{label}</span>
+                  <span className="text-base font-semibold text-foreground text-center">{label}</span>
                 </div>
               ))}
             </div>
