@@ -18,6 +18,7 @@ import {
   Camera,
   BookOpen,
 } from "lucide-react";
+import CountdownTimer from "@/components/CountdownTimer";
 import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
   TZUCHI_TRAIN_REGISTRATION_URL,
@@ -243,6 +244,8 @@ const TzuChiTrain = () => {
           </div>
         </div>
       </section>
+
+      <CountdownTimer />
 
       {/* ── Highlights ── */}
       <section className="py-14 border-y border-border/40 bg-sage/3">
