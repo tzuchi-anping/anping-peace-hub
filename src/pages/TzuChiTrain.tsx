@@ -73,14 +73,14 @@ const schedules: { day: string; date: string; items: ScheduleItem[] }[] = [
         time: "08:30",
         title: "走進靜思精舍・體悟農禪心法",
         description:
-          "靜思精舍，是慈濟的心臟，也是師父們安住修行之所。師父們秉持「一日不作，一日不食」的農禪精神，以雙手勞作維持自給自足，從不仰賴外援。踏入精舍，感受喧囂世界中難得的靜謐，看見師父們如何在晨曦與暮色之間，以正念勞動詮釋最樸實、也最深刻的修行智慧。",
+          "靜思精舍座落於花蓮縣新城鄉，是慈濟從此起家之地，也是全球慈濟人的心靈故鄉與靜思法脈的源頭。師父們秉持「一日不作，一日不食」的農禪精神，以雙手勞作自給自足，從不仰賴外援。踏入精舍，感受喧囂世界中難得的靜謐，體會那份在晨曦與暮色之間，以正念勞動詮釋出的樸實修行智慧。",
         icon: Sunrise,
         duration: "210 分鐘",
         highlight: true,
       },
       { time: "12:00", title: "午齋・養息", icon: Utensils },
       { time: "13:00", title: "自由活動・參訪書軒本店", icon: TreePine },
-      { time: "16:01", title: "搭自強324車次法喜賦歸", icon: Train, highlight: true },
+      { time: "16:01", title: "搭自強324車次法喜賦歸，20:31 抵達台南", icon: Train, highlight: true },
     ],
   },
 ];
@@ -288,7 +288,7 @@ const TzuChiTrain = () => {
               <div className="flex items-center gap-2">
                 <Train className="w-4 h-4 text-warm-amber" />
                 <span className="font-semibold">回程 自強324</span>
-                <span className="text-muted-foreground">16:01 花蓮 → 台南</span>
+                <span className="text-muted-foreground">16:01 花蓮 → 20:31 台南</span>
               </div>
             </div>
 
