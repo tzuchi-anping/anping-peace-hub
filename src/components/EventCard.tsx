@@ -9,11 +9,8 @@ const EventCard = () => {
     <section id="upcoming-event" className="py-20 bg-gradient-to-b from-background to-sage-light/10">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 bg-warm-amber/10 px-4 py-2 rounded-full">
-            <Calendar className="w-4 h-4 text-warm-amber" />
-            <span className="text-sm font-medium text-warm-amber">近期活動</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+          <span className="section-eyebrow">近期活動</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mt-3">
             植托邦蔬食市集 × 小老闆市集
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">

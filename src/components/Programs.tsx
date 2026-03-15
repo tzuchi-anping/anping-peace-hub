@@ -41,11 +41,8 @@ const Programs = () => {
     <section id="programs" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 bg-sage-light/20 px-4 py-2 rounded-full border border-sage-light">
-            <Sprout className="w-4 h-4 text-sage" />
-            <span className="text-sm font-medium text-sage">相關資訊</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground">社區計畫與服務</h2>
+          <span className="section-eyebrow">社區計畫與服務</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-3">共耕善的土地</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             從終身學習到永續生活，從長者關懷到社區共融
           </p>
