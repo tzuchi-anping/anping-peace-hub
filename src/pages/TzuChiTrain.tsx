@@ -8,7 +8,6 @@ import {
   MapPin,
   Train,
   ExternalLink,
-  ArrowLeft,
   Heart,
   Sunrise,
   Moon,
@@ -19,7 +18,6 @@ import {
   TreePine,
   Home,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
   TZUCHI_TRAIN_REGISTRATION_URL,
@@ -37,6 +35,7 @@ const highlights = [
 interface ScheduleItem {
   time: string;
   title: string;
+  description?: string;
   duration?: string;
   icon: typeof Clock;
   highlight?: boolean;
@@ -47,33 +46,41 @@ const schedules: { day: string; date: string; items: ScheduleItem[] }[] = [
     day: "DAY 1",
     date: "6月27日（六）",
     items: [
-      { time: "05:30", title: "台南火車站前站集合", icon: MapPin, highlight: true },
-      { time: "06:30", title: "出發", icon: Train },
-      { time: "10:59", title: "抵達花蓮（自強301車次）", icon: Train, highlight: true },
-      { time: "11:20", title: "花蓮靜思堂", icon: Home },
-      { time: "11:40", title: "放置行李、入座齋堂", icon: Home },
-      { time: "12:00", title: "午齋、養息、集合", icon: Utensils, duration: "90 分鐘" },
-      { time: "13:30", title: "花蓮靜思堂巡禮：慈濟博覽會", icon: Camera, duration: "90 分鐘" },
-      { time: "15:00", title: "慈濟醫院參訪", icon: Heart, duration: "90 分鐘" },
-      { time: "16:30", title: "慈濟大學參訪", icon: BookOpen, duration: "90 分鐘" },
+      { time: "06:00", title: "台南火車站前站集合，搭乘 06:30 自強 301 車次出發", icon: MapPin, highlight: true },
+      { time: "10:59", title: "抵達花蓮・入住靜思堂", icon: Home, highlight: true },
+      { time: "12:00", title: "午齋・養息", icon: Utensils, duration: "90 分鐘" },
+      {
+        time: "13:30",
+        title: "走讀四大志業・感受大愛足跡",
+        description:
+          "慈濟四大志業——慈善、醫療、教育、人文——是 上人以愛為基石，一磚一瓦砌起的精神工程。走入這片土地，您將親眼見證慈悲如何化為具體行動：從守護生命、陪伴苦難的慈善醫療，到作育英才、淨化人心的教育人文。每一處足跡，都承載著一個讓人動容的故事，也映照出您心中本有的善與愛。",
+        icon: Heart,
+        duration: "下午",
+        highlight: true,
+      },
       { time: "18:00", title: "藥石", icon: Utensils },
-      { time: "19:00", title: "知心相契", icon: Users },
-      { time: "20:00", title: "安單、盥洗、安板", icon: Moon },
+      { time: "19:00", title: "星空夜語", icon: Users },
+      { time: "20:00", title: "安單就寢", icon: Moon },
     ],
   },
   {
     day: "DAY 2",
     date: "6月28日（日）",
     items: [
-      { time: "06:00", title: "晨鐘～身心淨行", icon: Sunrise },
-      { time: "07:00", title: "早齋", icon: Utensils, duration: "50 分鐘" },
-      { time: "08:00", title: "發車前往精舍", icon: Train, highlight: true },
-      { time: "08:30", title: "分站活動：精舍巡禮、自力耕生園區參訪、故事屋", icon: Camera, duration: "210 分鐘" },
-      { time: "12:00", title: "午齋養息", icon: Utensils },
-      { time: "13:00", title: "自由活動時間", icon: TreePine },
-      { time: "13:30", title: "參訪書軒本店", icon: BookOpen },
-      { time: "15:00", title: "發車前往花蓮火車站", icon: Train },
-      { time: "16:01", title: "返家（自強324車次）法喜賦歸", icon: Train, highlight: true },
+      { time: "06:00", title: "晨鐘・身心淨行", icon: Sunrise },
+      { time: "07:00", title: "早齋", icon: Utensils },
+      {
+        time: "08:30",
+        title: "走進靜思精舍・體悟農禪心法",
+        description:
+          "靜思精舍，是慈濟的心臟，也是師父們安住修行之所。師父們秉持「一日不作，一日不食」的農禪精神，以雙手勞作維持自給自足，從不仰賴外援。踏入精舍，感受喧囂世界中難得的靜謐，看見師父們如何在晨曦與暮色之間，以正念勞動詮釋最樸實、也最深刻的修行智慧。",
+        icon: Sunrise,
+        duration: "210 分鐘",
+        highlight: true,
+      },
+      { time: "12:00", title: "午齋・養息", icon: Utensils },
+      { time: "13:00", title: "自由活動・參訪書軒本店", icon: TreePine },
+      { time: "16:01", title: "搭自強324車次法喜賦歸", icon: Train, highlight: true },
     ],
   },
 ];
@@ -136,6 +143,11 @@ const ScheduleTimeline = ({
               >
                 {item.title}
               </p>
+              {item.description && (
+                <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed border-l-2 border-sage-light/50 pl-2">
+                  {item.description}
+                </p>
+              )}
             </div>
           </div>
         );
@@ -157,14 +169,6 @@ const TzuChiTrain = () => {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-sage transition-colors mb-4"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              返回首頁
-            </Link>
-
             <div className="inline-flex items-center gap-2 bg-sage-light/20 backdrop-blur-sm px-4 py-2 rounded-full border border-sage-light">
               <Train className="w-4 h-4 text-sage" />
               <span className="text-sm font-medium text-foreground">
