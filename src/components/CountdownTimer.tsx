@@ -64,18 +64,21 @@ function CountdownBlock({
   title,
   subtitle,
   accent,
+  precision,
 }: {
   target: Date;
   title: string;
   subtitle: string;
   accent: "sage" | "amber";
+  precision: "days" | "minutes";
 }) {
   const [time, setTime] = useState<TimeLeft>(() => calcTimeLeft(target));
 
   useEffect(() => {
-    const id = setInterval(() => setTime(calcTimeLeft(target)), 1000);
+    const interval = precision === "minutes" ? 1000 : 60_000;
+    const id = setInterval(() => setTime(calcTimeLeft(target)), interval);
     return () => clearInterval(id);
-  }, [target]);
+  }, [target, precision]);
 
   const accentColor =
     accent === "amber"
@@ -99,6 +102,10 @@ function CountdownBlock({
       {/* Digits */}
       {time.expired ? (
         <p className="text-sm font-semibold text-muted-foreground py-4">已結束</p>
+      ) : precision === "days" ? (
+        <div className="flex items-end gap-2 md:gap-3">
+          <Digit value={time.days} label="天" />
+        </div>
       ) : (
         <div className="flex items-end gap-2 md:gap-3">
           <Digit value={time.days} label="天" />
@@ -106,8 +113,6 @@ function CountdownBlock({
           <Digit value={time.hours} label="時" />
           <span className={`text-2xl font-bold pb-5 ${dotColor}`}>:</span>
           <Digit value={time.minutes} label="分" />
-          <span className={`text-2xl font-bold pb-5 ${dotColor}`}>:</span>
-          <Digit value={time.seconds} label="秒" />
         </div>
       )}
     </div>
@@ -131,12 +136,14 @@ const CountdownTimer = () => (
             title="報名截止"
             subtitle="2026 年 5 月 10 日 23:59（台北時間）"
             accent="amber"
+            precision="minutes"
           />
           <CountdownBlock
             target={DEPARTURE_DATE}
             title="出發在即"
             subtitle="2026 年 6 月 27 日 06:00（台北時間）"
             accent="sage"
+            precision="days"
           />
         </div>
       </div>
