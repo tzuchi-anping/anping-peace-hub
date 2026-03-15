@@ -28,7 +28,7 @@ import {
 
 const highlights = [
   { icon: BookOpen, label: "走讀大愛足跡" },
-  { icon: Moon, label: "星空夜語" },
+  { icon: Moon, label: "星空交心對話" },
   { icon: Home, label: "體驗靜思家風" },
   { icon: TreePine, label: "專屬寧靜時光" },
 ];
@@ -48,13 +48,13 @@ const schedules: { day: string; date: string; items: ScheduleItem[] }[] = [
     date: "6月27日（六）",
     items: [
       { time: "06:00", title: "台南火車站前站集合，搭乘 06:30 自強 301 車次出發", icon: MapPin, highlight: true },
-      { time: "10:59", title: "抵達花蓮・入住靜思堂", icon: Home, highlight: true },
+      { time: "10:59", title: "抵達花蓮・入住全球慈濟人寮房", icon: Home, highlight: true },
       { time: "12:00", title: "午齋・養息", icon: Utensils, duration: "90 分鐘" },
       {
         time: "13:30",
         title: "走讀四大志業・感受大愛足跡",
         description:
-          "慈濟四大志業——慈善、醫療、教育、人文——是 上人以愛為基石，一磚一瓦砌起的精神工程。走入這片土地，您將親眼見證慈悲如何化為具體行動：從守護生命、陪伴苦難的慈善醫療，到作育英才、淨化人心的教育人文。每一處足跡，都承載著一個讓人動容的故事，也映照出您心中本有的善與愛。",
+          "慈濟四大志業「慈善、醫療、教育、人文」是 上人以愛為基石，一磚一瓦砌起的精神工程。走入這片園區，親眼見證慈悲如何化為具體行動：從守護生命、陪伴苦難的慈善醫療，到作育英才、淨化人心的教育人文。每一處足跡，都承載著一個讓人動容的故事，也映照出您心中本有的善與愛。",
         icon: Heart,
         duration: "下午",
         highlight: true,
@@ -72,9 +72,9 @@ const schedules: { day: string; date: string; items: ScheduleItem[] }[] = [
       { time: "07:00", title: "早齋", icon: Utensils },
       {
         time: "08:30",
-        title: "走進靜思精舍・體悟農禪心法",
+        title: "走進靜思精舍・體驗靜思家風",
         description:
-          "靜思精舍座落於花蓮縣新城鄉，是慈濟從此起家之地，也是全球慈濟人的心靈故鄉與靜思法脈的源頭。師父們秉持「一日不作，一日不食」的農禪精神，以雙手勞作自給自足，從不仰賴外援。踏入精舍，感受喧囂世界中難得的靜謐，體會那份在晨曦與暮色之間，以正念勞動詮釋出的樸實修行智慧。",
+          "靜思精舍是全球慈濟人的心靈故鄉，靜思法脈的源頭，師父們秉持「一日不作，一日不食」的農禪精神，以雙手勞作自給自足，從不仰賴外援。走入精舍，感受喧囂世界中難得的靜謐，體會那份在晨曦與暮色之間，以正念勞動詮釋出的樸實修行智慧。",
         icon: Sunrise,
         duration: "210 分鐘",
         highlight: true,
