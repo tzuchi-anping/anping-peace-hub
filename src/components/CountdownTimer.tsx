@@ -87,7 +87,7 @@ function CountdownBlock({
   const dotColor = accent === "amber" ? "text-warm-amber/60" : "text-sage/60";
 
   return (
-    <div className={`flex-1 rounded-2xl border p-6 md:p-8 ${accentColor} flex flex-col gap-5`}>
+    <div className={`flex-1 rounded-2xl border p-6 md:p-8 ${accentColor} flex flex-col items-center gap-5 text-center`}>
       {/* Header */}
       <div>
         <p
