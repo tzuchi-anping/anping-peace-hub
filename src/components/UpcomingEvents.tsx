@@ -10,7 +10,6 @@ import {
   UtensilsCrossed,
   MapPin,
   Footprints,
-  CloudRain,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -33,16 +32,21 @@ import {
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
 } from "@/lib/constants";
 
+const SLIDE_COUNT = 3;
+
+const SLIDE_CARD_CLASS =
+  "overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5";
+
 const UpcomingEvents = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
-  const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
     if (!api) return;
-    setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
-    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    return () => { api.off("select", onSelect); };
   }, [api]);
 
   return (
@@ -87,7 +91,7 @@ const UpcomingEvents = () => {
 
           {/* Dot indicators */}
           <div className="flex justify-center gap-2 mt-6">
-            {Array.from({ length: count }).map((_, i) => (
+            {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
               <button
                 key={i}
                 onClick={() => api?.scrollTo(i)}
@@ -108,7 +112,7 @@ const UpcomingEvents = () => {
 
 /* ─── Slide: 朝山經行 ─── */
 const PilgrimageSlide = () => (
-  <Card className="overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5">
+  <Card className={SLIDE_CARD_CLASS}>
     <div className="flex flex-col md:flex-row">
       <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
         <div className="overflow-hidden h-full">
@@ -156,10 +160,7 @@ const PilgrimageSlide = () => (
             <li>戶外經行，不脫鞋，請穿著舒適包鞋</li>
             <li>建議穿著：長袖藍衣藍褲或灰衣藍褲</li>
             <li>攜帶物品：輕便背包、水杯、個人藥品</li>
-            <li className="flex items-start gap-1">
-              <CloudRain className="w-4 h-4 text-sage mt-0.5 flex-shrink-0" />
-              <span>雨天備案：移至佛堂禮拜《三十七助道品》（請攜帶襪套）</span>
-            </li>
+            <li>雨天備案：移至佛堂禮拜《三十七助道品》（請攜帶襪套）</li>
           </ul>
         </div>
       </div>
@@ -167,9 +168,34 @@ const PilgrimageSlide = () => (
   </Card>
 );
 
+/* ─── Market sub-card (used by PlantopiaSlide) ─── */
+const MarketCard = ({ image, alt, registerUrl, infoUrl }: {
+  image: string; alt: string; registerUrl: string; infoUrl: string;
+}) => (
+  <div className="space-y-3">
+    <div className="aspect-[3/4] max-h-80 overflow-hidden rounded-lg mx-auto">
+      <img src={image} alt={alt} className="w-full h-full object-cover" />
+    </div>
+    <div className="flex gap-2">
+      <Button variant="warm" size="sm" className="flex-1 group" asChild>
+        <a href={registerUrl} target="_blank" rel="noopener noreferrer">
+          <Store className="w-4 h-4" />
+          我要擺攤
+        </a>
+      </Button>
+      <Button variant="outline" size="sm" className="flex-1 group" asChild>
+        <a href={infoUrl} target="_blank" rel="noopener noreferrer">
+          了解更多
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </Button>
+    </div>
+  </div>
+);
+
 /* ─── Slide: 植托邦蔬食市集 × 小老闆市集 ─── */
 const PlantopiaSlide = () => (
-  <Card className="overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5">
+  <Card className={SLIDE_CARD_CLASS}>
     <div className="p-6 md:p-8 space-y-6">
       <div className="text-center space-y-2">
         <h3 className="text-2xl md:text-3xl font-bold text-foreground">
@@ -194,56 +220,18 @@ const PlantopiaSlide = () => (
         </div>
       </div>
       <div className="grid md:grid-cols-2 gap-4">
-        <div className="space-y-3">
-          <div className="aspect-[3/4] max-h-80 overflow-hidden rounded-lg mx-auto">
-            <img
-              src={plantopiaImage}
-              alt="植托邦蔬食市集海報"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex gap-2">
-            <Button variant="warm" size="sm" className="flex-1 group" asChild>
-              <a href="https://tally.so/r/1AXodW" target="_blank" rel="noopener noreferrer">
-                <Store className="w-4 h-4" />
-                我要擺攤
-              </a>
-            </Button>
-            <Button variant="outline" size="sm" className="flex-1 group" asChild>
-              <a href="https://www.instagram.com/plantopia2025/" target="_blank" rel="noopener noreferrer">
-                了解更多
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </Button>
-          </div>
-        </div>
-        <div className="space-y-3">
-          <div className="aspect-[3/4] max-h-80 overflow-hidden rounded-lg mx-auto">
-            <img
-              src={kidMarketImage}
-              alt="小老闆市集海報"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex gap-2">
-            <Button variant="warm" size="sm" className="flex-1 group" asChild>
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfw-P_T6gp_9yTjd8iN4AvakCGA4SzFbDaLkAaKYh1M_CiJaA/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Store className="w-4 h-4" />
-                我要擺攤
-              </a>
-            </Button>
-            <Button variant="outline" size="sm" className="flex-1 group" asChild>
-              <a href="https://www.facebook.com/share/1DDd8VZjqh/" target="_blank" rel="noopener noreferrer">
-                了解更多
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </Button>
-          </div>
-        </div>
+        <MarketCard
+          image={plantopiaImage}
+          alt="植托邦蔬食市集海報"
+          registerUrl="https://tally.so/r/1AXodW"
+          infoUrl="https://www.instagram.com/plantopia2025/"
+        />
+        <MarketCard
+          image={kidMarketImage}
+          alt="小老闆市集海報"
+          registerUrl="https://docs.google.com/forms/d/e/1FAIpQLSfw-P_T6gp_9yTjd8iN4AvakCGA4SzFbDaLkAaKYh1M_CiJaA/viewform"
+          infoUrl="https://www.facebook.com/share/1DDd8VZjqh/"
+        />
       </div>
     </div>
   </Card>
@@ -251,7 +239,7 @@ const PlantopiaSlide = () => (
 
 /* ─── Slide: 慈濟列車 ─── */
 const TzuChiTrainSlide = () => (
-  <Card className="overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5">
+  <Card className={SLIDE_CARD_CLASS}>
     <div className="flex flex-col md:flex-row">
       <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
         <Link to="/tzuchi-train" className="block overflow-hidden h-full">
