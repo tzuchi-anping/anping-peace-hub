@@ -32,17 +32,17 @@ import {
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
 } from "@/lib/constants";
 
-const SLIDE_COUNT = 3;
-
 const SLIDE_CARD_CLASS =
   "overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5";
 
 const UpcomingEvents = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
+  const [slideCount, setSlideCount] = React.useState(0);
 
   React.useEffect(() => {
     if (!api) return;
+    setSlideCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
     const onSelect = () => setCurrent(api.selectedScrollSnap());
     api.on("select", onSelect);
@@ -91,7 +91,7 @@ const UpcomingEvents = () => {
 
           {/* Dot indicators */}
           <div className="flex justify-center gap-2 mt-6">
-            {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
+            {Array.from({ length: slideCount }).map((_, i) => (
               <button
                 key={i}
                 onClick={() => api?.scrollTo(i)}
@@ -100,7 +100,7 @@ const UpcomingEvents = () => {
                     ? "bg-sage w-6"
                     : "bg-sage/30 hover:bg-sage/50"
                 }`}
-                aria-label={`Go to slide ${i + 1}`}
+                aria-label={`前往第 ${i + 1} 張`}
               />
             ))}
           </div>
