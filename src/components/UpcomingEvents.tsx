@@ -33,12 +33,14 @@ import {
 } from "@/lib/constants";
 
 const SLIDE_CARD_CLASS =
-  "overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5";
+  "overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5 min-h-[480px] flex flex-col justify-center";
 
 const UpcomingEvents = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [slideCount, setSlideCount] = React.useState(0);
+
+  const [isPaused, setIsPaused] = React.useState(false);
 
   React.useEffect(() => {
     if (!api) return;
@@ -48,6 +50,12 @@ const UpcomingEvents = () => {
     api.on("select", onSelect);
     return () => { api.off("select", onSelect); };
   }, [api]);
+
+  React.useEffect(() => {
+    if (!api || isPaused) return;
+    const timer = setInterval(() => api.scrollNext(), 5000);
+    return () => clearInterval(timer);
+  }, [api, isPaused]);
 
   return (
     <section
@@ -67,6 +75,8 @@ const UpcomingEvents = () => {
             setApi={setApi}
             opts={{ loop: true }}
             className="w-full"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
             <CarouselContent>
               {/* Slide 1: 朝山經行 */}
@@ -113,7 +123,7 @@ const UpcomingEvents = () => {
 /* ─── Slide: 朝山經行 ─── */
 const PilgrimageSlide = () => (
   <Card className={SLIDE_CARD_CLASS}>
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row flex-1">
       <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
         <div className="overflow-hidden h-full">
           <img
@@ -240,7 +250,7 @@ const PlantopiaSlide = () => (
 /* ─── Slide: 慈濟列車 ─── */
 const TzuChiTrainSlide = () => (
   <Card className={SLIDE_CARD_CLASS}>
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row flex-1">
       <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
         <Link to="/tzuchi-train" className="block overflow-hidden h-full">
           <img
