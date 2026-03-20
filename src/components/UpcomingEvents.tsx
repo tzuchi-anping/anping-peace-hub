@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Leaf,
   Store,
-  ExternalLink,
   UtensilsCrossed,
   MapPin,
   Footprints,
@@ -25,7 +24,6 @@ import {
 import posterTrain from "@/assets/tzuchi-train-2026.png";
 import posterPilgrimage from "@/assets/pilgrimage-2026.png";
 import plantopiaImage from "@/assets/plantopia-20260411.png";
-import kidMarketImage from "@/assets/kid-20260411.jpg";
 import {
   TZUCHI_TRAIN_REGISTRATION_URL,
   TZUCHI_TRAIN_EVENT_DATE,
@@ -178,70 +176,66 @@ const PilgrimageSlide = () => (
   </Card>
 );
 
-/* ─── Market sub-card (used by PlantopiaSlide) ─── */
-const MarketCard = ({ image, alt, registerUrl, infoUrl }: {
-  image: string; alt: string; registerUrl: string; infoUrl: string;
-}) => (
-  <div className="space-y-3">
-    <div className="aspect-[3/4] max-h-80 overflow-hidden rounded-lg mx-auto">
-      <img src={image} alt={alt} className="w-full h-full object-cover" />
-    </div>
-    <div className="flex gap-2">
-      <Button variant="warm" size="sm" className="flex-1 group" asChild>
-        <a href={registerUrl} target="_blank" rel="noopener noreferrer">
-          <Store className="w-4 h-4" />
-          我要擺攤
-        </a>
-      </Button>
-      <Button variant="outline" size="sm" className="flex-1 group" asChild>
-        <a href={infoUrl} target="_blank" rel="noopener noreferrer">
-          了解更多
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
-      </Button>
-    </div>
-  </div>
-);
-
 /* ─── Slide: 植托邦蔬食市集 × 小老闆市集 ─── */
 const PlantopiaSlide = () => (
   <Card className={SLIDE_CARD_CLASS}>
-    <div className="p-6 md:p-8 space-y-6">
-      <div className="text-center space-y-2">
+    <div className="flex flex-col md:flex-row flex-1">
+      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
+        <div className="overflow-hidden h-full">
+          <img
+            src={plantopiaImage}
+            alt="植托邦蔬食市集海報"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+      <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
+        <div className="inline-flex items-center gap-2 bg-sage/10 px-3 py-1 rounded-full w-fit">
+          <Leaf className="w-3.5 h-3.5 text-sage" />
+          <span className="text-xs font-medium text-sage">蔬食護生・環保永續</span>
+        </div>
         <h3 className="text-2xl md:text-3xl font-bold text-foreground">
           植托邦蔬食市集 × 小老闆市集
         </h3>
-        <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+        <p className="text-muted-foreground leading-relaxed">
           以「蔬食護生、環保永續」為核心，打造蔬食者盡情徜徉的饗食天堂。攜手小老闆市集，讓孩子透過擺攤延續物命、學習規劃與珍惜。
         </p>
-        <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm pt-2">
-          <span className="flex items-center gap-1.5 font-semibold">
+        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <span className="flex items-center gap-1.5">
             <Calendar className="w-4 h-4 text-sage" />
             2026/04/11（六）
           </span>
-          <span className="flex items-center gap-1.5 font-semibold">
+          <span className="flex items-center gap-1.5">
             <Clock className="w-4 h-4 text-sage" />
             14:00 – 19:00
           </span>
+          <span className="flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 text-sage" />
+            慈濟安平聯絡處
+          </span>
         </div>
-        <div className="flex items-center justify-center gap-2 p-2.5 rounded-lg bg-warm-amber/15 text-warm-amber font-semibold text-sm mt-2">
+        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-warm-amber/15 text-warm-amber font-semibold text-sm">
           <UtensilsCrossed className="w-4 h-4 flex-shrink-0" />
           <span>響應無痕生活，請自備環保餐具、碗筷及杯子</span>
         </div>
-      </div>
-      <div className="grid md:grid-cols-2 gap-4">
-        <MarketCard
-          image={plantopiaImage}
-          alt="植托邦蔬食市集海報"
-          registerUrl="https://tally.so/r/1AXodW"
-          infoUrl="https://www.instagram.com/plantopia2025/"
-        />
-        <MarketCard
-          image={kidMarketImage}
-          alt="小老闆市集海報"
-          registerUrl="https://docs.google.com/forms/d/e/1FAIpQLSfw-P_T6gp_9yTjd8iN4AvakCGA4SzFbDaLkAaKYh1M_CiJaA/viewform"
-          infoUrl="https://www.facebook.com/share/1DDd8VZjqh/"
-        />
+        <div className="flex flex-wrap gap-3 pt-1">
+          <Button variant="warm" size="lg" className="group" asChild>
+            <a href="https://tally.so/r/1AXodW" target="_blank" rel="noopener noreferrer">
+              <Store className="w-4 h-4" />
+              植托邦擺攤報名
+            </a>
+          </Button>
+          <Button variant="outline" size="lg" className="group" asChild>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfw-P_T6gp_9yTjd8iN4AvakCGA4SzFbDaLkAaKYh1M_CiJaA/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Store className="w-4 h-4" />
+              小老闆擺攤報名
+            </a>
+          </Button>
+        </div>
       </div>
     </div>
   </Card>
