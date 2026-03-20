@@ -33,12 +33,10 @@ const NOTICE_BANNER_STYLES = {
 const UpcomingEvents = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
-  const [slideCount, setSlideCount] = React.useState(0);
   const [isPaused, setIsPaused] = React.useState(false);
 
   React.useEffect(() => {
     if (!api) return;
-    setSlideCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
     const onSelect = () => setCurrent(api.selectedScrollSnap());
     api.on("select", onSelect);
@@ -86,7 +84,7 @@ const UpcomingEvents = () => {
 
           {/* Dot indicators */}
           <div className="flex justify-center gap-2 mt-6">
-            {Array.from({ length: slideCount }).map((_, i) => (
+            {UPCOMING_EVENTS.map((_, i) => (
               <button
                 key={i}
                 onClick={() => api?.scrollTo(i)}
@@ -125,11 +123,12 @@ const EventSlide = ({
               <img
                 src={image}
                 alt={imageAlt}
+                loading="lazy"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </Link>
           ) : (
-            <img src={image} alt={imageAlt} className="w-full h-full object-cover" />
+            <img src={image} alt={imageAlt} loading="lazy" className="w-full h-full object-cover" />
           )}
         </div>
 

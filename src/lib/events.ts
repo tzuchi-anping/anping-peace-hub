@@ -24,11 +24,12 @@ import {
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export type BadgeColor = "sage" | "warm-amber";
+export type NoticeColor = "sage" | "warm-amber";
 
 /** 活動提醒區塊：條列式 or 橫幅 */
 export type EventNotice =
   | { type: "list"; titleIcon: LucideIcon; title: string; items: string[] }
-  | { type: "banner"; icon: LucideIcon; text: string; color: BadgeColor };
+  | { type: "banner"; icon: LucideIcon; text: string; color: NoticeColor };
 
 export type EventAction = {
   label: string;
