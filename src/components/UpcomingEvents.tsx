@@ -1,15 +1,4 @@
 import * as React from "react";
-import {
-  Calendar,
-  Clock,
-  Heart,
-  ArrowRight,
-  Leaf,
-  Store,
-  UtensilsCrossed,
-  MapPin,
-  Footprints,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -21,25 +10,30 @@ import {
   CarouselNext,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import posterTrain from "@/assets/tzuchi-train-2026.png";
-import posterPilgrimage from "@/assets/pilgrimage-2026.png";
-import plantopiaImage from "@/assets/plantopia-20260411.png";
-import {
-  TZUCHI_TRAIN_REGISTRATION_URL,
-  TZUCHI_TRAIN_EVENT_DATE,
-  TZUCHI_TRAIN_REGISTRATION_DEADLINE,
-  PLANTOPIA_REGISTRATION_URL,
-  KID_MARKET_REGISTRATION_URL,
-} from "@/lib/constants";
+import { type UpcomingEvent, type EventNotice, UPCOMING_EVENTS } from "@/lib/events";
+
+// ─── Constants ───────────────────────────────────────────────────────────────
 
 const SLIDE_CARD_CLASS =
   "overflow-hidden border-sage/20 shadow-xl bg-gradient-to-r from-sage/5 via-sage-light/10 to-warm-amber/5 min-h-[480px] flex flex-col justify-center";
+
+// 靜態 class 對應表，讓 Tailwind JIT 能掃描到完整 class 名稱
+const BADGE_STYLES = {
+  sage: { bg: "bg-sage/10", text: "text-sage" },
+  "warm-amber": { bg: "bg-warm-amber/10", text: "text-warm-amber" },
+} as const;
+
+const NOTICE_BANNER_STYLES = {
+  "warm-amber": "bg-warm-amber/15 text-warm-amber",
+  sage: "bg-sage/5 text-sage",
+} as const;
+
+// ─── Main Component ──────────────────────────────────────────────────────────
 
 const UpcomingEvents = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [slideCount, setSlideCount] = React.useState(0);
-
   const [isPaused, setIsPaused] = React.useState(false);
 
   React.useEffect(() => {
@@ -79,20 +73,11 @@ const UpcomingEvents = () => {
             onMouseLeave={() => setIsPaused(false)}
           >
             <CarouselContent>
-              {/* Slide 1: 朝山經行 */}
-              <CarouselItem>
-                <PilgrimageSlide />
-              </CarouselItem>
-
-              {/* Slide 2: 植托邦蔬食市集 × 小老闆市集 */}
-              <CarouselItem>
-                <PlantopiaSlide />
-              </CarouselItem>
-
-              {/* Slide 3: 慈濟列車 */}
-              <CarouselItem>
-                <TzuChiTrainSlide />
-              </CarouselItem>
+              {UPCOMING_EVENTS.map((event) => (
+                <CarouselItem key={event.id}>
+                  <EventSlide {...event} />
+                </CarouselItem>
+              ))}
             </CarouselContent>
 
             <CarouselPrevious className="hidden md:inline-flex" />
@@ -120,180 +105,114 @@ const UpcomingEvents = () => {
   );
 };
 
-/* ─── Slide: 朝山經行 ─── */
-const PilgrimageSlide = () => (
-  <Card className={SLIDE_CARD_CLASS}>
-    <div className="flex flex-col md:flex-row flex-1">
-      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden">
-        <img
-          src={posterPilgrimage}
-          alt="2026 朝山經行海報"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
-        <div className="inline-flex items-center gap-2 bg-sage/10 px-3 py-1 rounded-full w-fit">
-          <Footprints className="w-3.5 h-3.5 text-sage" />
-          <span className="text-xs font-medium text-sage">慈濟60周年</span>
-        </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-          朝山經行
-        </h3>
-        <p className="text-lg text-sage font-semibold">
-          六十行願，一念初心
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          在這特別的時刻，邀請您用雙腳走一段路，在步步經行中，與心對話、與法相應。
-        </p>
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4 text-sage" />
-            2026/04/12（日）
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-sage" />
-            15:00 ~ 17:30
-          </span>
-          <span className="flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-sage" />
-            慈濟安平聯絡處
-          </span>
-        </div>
-        <div className="space-y-2 text-sm text-muted-foreground bg-sage/5 rounded-lg p-4">
-          <p className="font-semibold text-foreground flex items-center gap-1.5">
-            <Leaf className="w-4 h-4 text-sage" />
-            活動提醒
-          </p>
-          <ul className="space-y-1 ml-5 list-disc">
-            <li>戶外經行，不脫鞋，請穿著舒適包鞋</li>
-            <li>建議穿著：長袖藍衣藍褲或灰衣藍褲</li>
-            <li>攜帶物品：輕便背包、水杯、個人藥品</li>
-            <li>雨天備案：移至佛堂禮拜《三十七助道品》（請攜帶襪套）</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </Card>
-);
+// ─── EventSlide ──────────────────────────────────────────────────────────────
 
-/* ─── Slide: 植托邦蔬食市集 × 小老闆市集 ─── */
-const PlantopiaSlide = () => (
-  <Card className={SLIDE_CARD_CLASS}>
-    <div className="flex flex-col md:flex-row flex-1">
-      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden">
-        <img
-          src={plantopiaImage}
-          alt="植托邦蔬食市集海報"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
-        <div className="inline-flex items-center gap-2 bg-sage/10 px-3 py-1 rounded-full w-fit">
-          <Leaf className="w-3.5 h-3.5 text-sage" />
-          <span className="text-xs font-medium text-sage">蔬食護生・環保永續</span>
-        </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-          植托邦蔬食市集 × 小老闆市集
-        </h3>
-        <p className="text-muted-foreground leading-relaxed">
-          以「蔬食護生、環保永續」為核心，打造蔬食者盡情徜徉的饗食天堂。攜手小老闆市集，讓孩子透過擺攤延續物命、學習規劃與珍惜。
-        </p>
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4 text-sage" />
-            2026/04/11（六）
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-sage" />
-            14:00 – 19:00
-          </span>
-          <span className="flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-sage" />
-            慈濟安平聯絡處
-          </span>
-        </div>
-        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-warm-amber/15 text-warm-amber font-semibold text-sm">
-          <UtensilsCrossed className="w-4 h-4 flex-shrink-0" />
-          <span>響應無痕生活，請自備環保餐具、碗筷及杯子</span>
-        </div>
-        <div className="flex flex-wrap gap-3 pt-1">
-          <Button variant="warm" size="lg" className="group" asChild>
-            <a href={PLANTOPIA_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
-              <Store className="w-4 h-4" />
-              植托邦擺攤報名
-            </a>
-          </Button>
-          <Button variant="outline" size="lg" className="group" asChild>
-            <a href={KID_MARKET_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
-              <Store className="w-4 h-4" />
-              小老闆擺攤報名
-            </a>
-          </Button>
-        </div>
-      </div>
-    </div>
-  </Card>
-);
+const EventSlide = ({
+  image, imageAlt, imageLink,
+  badge, title, subtitle, description,
+  meta, notice, actions,
+}: UpcomingEvent) => {
+  const badgeStyle = BADGE_STYLES[badge.color];
+  const BadgeIcon = badge.icon;
 
-/* ─── Slide: 慈濟列車 ─── */
-const TzuChiTrainSlide = () => (
-  <Card className={SLIDE_CARD_CLASS}>
-    <div className="flex flex-col md:flex-row flex-1">
-      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
-        <Link to="/tzuchi-train" className="block overflow-hidden h-full">
-          <img
-            src={posterTrain}
-            alt="2026 安平聯區慈濟列車海報"
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-          />
-        </Link>
-      </div>
-      <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
-        <div className="inline-flex items-center gap-2 bg-warm-amber/10 px-3 py-1 rounded-full w-fit">
-          <span className="text-xs font-medium text-warm-amber">
-            熱烈報名中
-          </span>
-        </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-          2026 安平聯區慈濟列車
-        </h3>
-        <p className="text-lg text-sage font-semibold">
-          花蓮「心」履行 — 兩天一夜心靈之旅
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          遠離塵世的喧囂，放慢匆忙的腳步。邀請您搭上這班滿載溫暖的列車，回到「心靈的故鄉」——花蓮。
-        </p>
-        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <span className="flex items-center gap-1">
-            <Calendar className="w-4 h-4 text-sage" />
-            {TZUCHI_TRAIN_EVENT_DATE}
-          </span>
-          <span className="flex items-center gap-1">
-            <Clock className="w-4 h-4 text-sage" />
-            {TZUCHI_TRAIN_REGISTRATION_DEADLINE}
-          </span>
-        </div>
-        <div className="flex flex-wrap gap-3 pt-2">
-          <Button variant="warm" size="lg" className="group" asChild>
-            <a
-              href={TZUCHI_TRAIN_REGISTRATION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Heart className="w-4 h-4" />
-              立即報名
-            </a>
-          </Button>
-          <Button variant="outline" size="lg" className="group" asChild>
-            <Link to="/tzuchi-train">
-              了解更多
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+  return (
+    <Card className={SLIDE_CARD_CLASS}>
+      <div className="flex flex-col md:flex-row flex-1">
+        {/* 左側圖片 */}
+        <div className="md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden">
+          {imageLink ? (
+            <Link to={imageLink} className="block h-full">
+              <img
+                src={image}
+                alt={imageAlt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
             </Link>
-          </Button>
+          ) : (
+            <img src={image} alt={imageAlt} className="w-full h-full object-cover" />
+          )}
+        </div>
+
+        {/* 右側文字 */}
+        <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
+          {/* 標籤 */}
+          <div className={`inline-flex items-center gap-2 ${badgeStyle.bg} px-3 py-1 rounded-full w-fit`}>
+            {BadgeIcon && <BadgeIcon className={`w-3.5 h-3.5 ${badgeStyle.text}`} />}
+            <span className={`text-xs font-medium ${badgeStyle.text}`}>{badge.text}</span>
+          </div>
+
+          <h3 className="text-2xl md:text-3xl font-bold text-foreground">{title}</h3>
+          {subtitle && (
+            <p className="text-lg text-sage font-semibold">{subtitle}</p>
+          )}
+          <p className="text-muted-foreground leading-relaxed">{description}</p>
+
+          {/* 日期 / 時間 / 地點 */}
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            {meta.map(({ icon: Icon, text }, i) => (
+              <span key={i} className="flex items-center gap-1.5">
+                <Icon className="w-4 h-4 text-sage" />
+                {text}
+              </span>
+            ))}
+          </div>
+
+          {/* 活動提醒 */}
+          {notice && <NoticeBlock notice={notice} />}
+
+          {/* 按鈕 */}
+          {actions.length > 0 && (
+            <div className="flex flex-wrap gap-3 pt-1">
+              {actions.map(({ label, href, variant, leadingIcon: LeadingIcon, trailingIcon: TrailingIcon, trailingIconClass, isInternal }, i) => (
+                <Button key={i} variant={variant} size="lg" className="group" asChild>
+                  {isInternal ? (
+                    <Link to={href}>
+                      {LeadingIcon && <LeadingIcon className="w-4 h-4" />}
+                      {label}
+                      {TrailingIcon && <TrailingIcon className={`w-4 h-4 ${trailingIconClass ?? ""}`} />}
+                    </Link>
+                  ) : (
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      {LeadingIcon && <LeadingIcon className="w-4 h-4" />}
+                      {label}
+                      {TrailingIcon && <TrailingIcon className={`w-4 h-4 ${trailingIconClass ?? ""}`} />}
+                    </a>
+                  )}
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
+    </Card>
+  );
+};
+
+// ─── NoticeBlock ─────────────────────────────────────────────────────────────
+
+const NoticeBlock = ({ notice }: { notice: EventNotice }) => {
+  if (notice.type === "list") {
+    const TitleIcon = notice.titleIcon;
+    return (
+      <div className="space-y-2 text-sm text-muted-foreground bg-sage/5 rounded-lg p-4">
+        <p className="font-semibold text-foreground flex items-center gap-1.5">
+          <TitleIcon className="w-4 h-4 text-sage" />
+          {notice.title}
+        </p>
+        <ul className="space-y-1 ml-5 list-disc">
+          {notice.items.map((item, i) => <li key={i}>{item}</li>)}
+        </ul>
+      </div>
+    );
+  }
+
+  const NoticeIcon = notice.icon;
+  return (
+    <div className={`flex items-center gap-2 p-2.5 rounded-lg font-semibold text-sm ${NOTICE_BANNER_STYLES[notice.color]}`}>
+      <NoticeIcon className="w-4 h-4 flex-shrink-0" />
+      <span>{notice.text}</span>
     </div>
-  </Card>
-);
+  );
+};
 
 export default UpcomingEvents;
