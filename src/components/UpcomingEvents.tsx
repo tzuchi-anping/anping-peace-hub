@@ -28,6 +28,8 @@ import {
   TZUCHI_TRAIN_REGISTRATION_URL,
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
+  PLANTOPIA_REGISTRATION_URL,
+  KID_MARKET_REGISTRATION_URL,
 } from "@/lib/constants";
 
 const SLIDE_CARD_CLASS =
@@ -122,14 +124,12 @@ const UpcomingEvents = () => {
 const PilgrimageSlide = () => (
   <Card className={SLIDE_CARD_CLASS}>
     <div className="flex flex-col md:flex-row flex-1">
-      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
-        <div className="overflow-hidden h-full">
-          <img
-            src={posterPilgrimage}
-            alt="2026 朝山經行海報"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden">
+        <img
+          src={posterPilgrimage}
+          alt="2026 朝山經行海報"
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
         <div className="inline-flex items-center gap-2 bg-sage/10 px-3 py-1 rounded-full w-fit">
@@ -180,14 +180,12 @@ const PilgrimageSlide = () => (
 const PlantopiaSlide = () => (
   <Card className={SLIDE_CARD_CLASS}>
     <div className="flex flex-col md:flex-row flex-1">
-      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0">
-        <div className="overflow-hidden h-full">
-          <img
-            src={plantopiaImage}
-            alt="植托邦蔬食市集海報"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <div className="md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden">
+        <img
+          src={plantopiaImage}
+          alt="植托邦蔬食市集海報"
+          className="w-full h-full object-cover"
+        />
       </div>
       <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
         <div className="inline-flex items-center gap-2 bg-sage/10 px-3 py-1 rounded-full w-fit">
@@ -220,17 +218,13 @@ const PlantopiaSlide = () => (
         </div>
         <div className="flex flex-wrap gap-3 pt-1">
           <Button variant="warm" size="lg" className="group" asChild>
-            <a href="https://tally.so/r/1AXodW" target="_blank" rel="noopener noreferrer">
+            <a href={PLANTOPIA_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
               <Store className="w-4 h-4" />
               植托邦擺攤報名
             </a>
           </Button>
           <Button variant="outline" size="lg" className="group" asChild>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfw-P_T6gp_9yTjd8iN4AvakCGA4SzFbDaLkAaKYh1M_CiJaA/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={KID_MARKET_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
               <Store className="w-4 h-4" />
               小老闆擺攤報名
             </a>
