@@ -5,7 +5,6 @@ import {
   MapPin,
   Leaf,
   Footprints,
-  Heart,
   ArrowRight,
   Store,
   UtensilsCrossed,
@@ -14,7 +13,6 @@ import posterTrain from "@/assets/tzuchi-train-2026.png";
 import posterPilgrimage from "@/assets/pilgrimage-2026.png";
 import plantopiaImage from "@/assets/plantopia-20260411.png";
 import {
-  TZUCHI_TRAIN_REGISTRATION_URL,
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
   PLANTOPIA_REGISTRATION_URL,
@@ -133,7 +131,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     image: posterTrain,
     imageAlt: "2026 安平聯區慈濟列車海報",
     imageLink: "/tzuchi-train",
-    badge: { text: "熱烈報名中", color: "warm-amber" },
+    badge: { text: "已額滿", color: "warm-amber" },
     title: "2026 安平聯區慈濟列車",
     subtitle: "花蓮「心」履行 — 兩天一夜心靈之旅",
     description:
@@ -143,12 +141,6 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
       { icon: Clock, text: TZUCHI_TRAIN_REGISTRATION_DEADLINE },
     ],
     actions: [
-      {
-        label: "立即報名",
-        href: TZUCHI_TRAIN_REGISTRATION_URL,
-        variant: "warm",
-        leadingIcon: Heart,
-      },
       {
         label: "了解更多",
         href: "/tzuchi-train",
