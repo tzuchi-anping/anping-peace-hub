@@ -179,7 +179,6 @@ const TzuChiTrain = () => {
                   <span className="section-eyebrow">2026 安平聯區 · 兩天一夜</span>
                 </div>
 
-                {/* Sold-out notice — prominent, immediately visible */}
                 {TZUCHI_TRAIN_IS_FULL && (
                   <div className="animate-fade-in-delay-1 flex items-start gap-3 px-4 py-4 bg-warm-amber/10 border border-warm-amber/40 rounded-xl">
                     <AlertCircle className="w-5 h-5 text-warm-amber flex-shrink-0 mt-0.5" />
@@ -319,10 +318,8 @@ const TzuChiTrain = () => {
           <div className="max-w-2xl mx-auto">
             {TZUCHI_TRAIN_IS_FULL ? (
               <div className="rounded-2xl border border-warm-amber/30 bg-warm-amber/8 px-8 py-10 text-center space-y-5">
-                <div className="flex justify-center">
-                  <div className="w-16 h-16 rounded-full bg-warm-amber/15 flex items-center justify-center">
-                    <CheckCircle2 className="w-8 h-8 text-warm-amber" />
-                  </div>
+                <div className="mx-auto w-16 h-16 rounded-full bg-warm-amber/15 flex items-center justify-center">
+                  <CheckCircle2 className="w-8 h-8 text-warm-amber" />
                 </div>
                 <div className="space-y-2">
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground">
