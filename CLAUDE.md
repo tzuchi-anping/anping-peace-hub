@@ -34,9 +34,9 @@ If set to `host: "::"`, the server fails with `EAFNOSUPPORT`.
 **Solution: Launch Playwright's bundled Chromium via CDP, then connect.**
 
 ```bash
-# 1. Launch Chromium with CDP
-/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome \
-  --headless --no-sandbox --disable-dev-shm-usage \
+# 1. Find and launch Chromium with CDP (version-independent path)
+CHROME=$(find /root/.cache/ms-playwright -name chrome -type f | head -1)
+$CHROME --headless --no-sandbox --disable-dev-shm-usage \
   --remote-debugging-port=9222 http://localhost:8080 &
 
 # 2. Verify CDP
@@ -47,20 +47,20 @@ agent-browser --cdp 9222 snapshot
 agent-browser --cdp 9222 screenshot page.png
 ```
 
-### Navigation timeout workaround
+### Navigation & SPA hydration
 
-`agent-browser --cdp 9222 open <url>` times out. Use eval instead:
+`agent-browser --cdp 9222 open <url>` times out. Use eval to navigate,
+then poll for React to finish rendering before interacting:
 
 ```bash
 agent-browser --cdp 9222 eval "window.location.href = 'http://localhost:8080/path'"
-sleep 8
-agent-browser --cdp 9222 eval "document.readyState"
+# Poll until page is ready (readyState complete + React root rendered)
+for i in $(seq 1 15); do
+  sleep 1
+  READY=$(agent-browser --cdp 9222 eval "document.readyState === 'complete' && (document.querySelector('#root')?.innerHTML.length || 0) > 0")
+  echo "$READY" | grep -q "true" && break
+done
 ```
-
-### React SPA hydration
-
-After `window.location.href` navigation, wait for `document.readyState === 'complete'`
-and `#root` innerHTML length > 0 before snapshots.
 
 ### dbus errors
 
