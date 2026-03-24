@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$CLAUDE_CODE_REMOTE\" ] && [ ! -d \".claude/skills/agent-browser\" ]; then npx -y skills add vercel-labs/agent-browser -a claude-code -y; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

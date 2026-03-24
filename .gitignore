@@ -25,3 +25,8 @@ dist-ssr
 
 # WSL Zone.Identifier files
 *:Zone.Identifier
+
+# Skills installed dynamically via SessionStart hook (not committed)
+.agents/
+.claude/skills/
+skills-lock.json
