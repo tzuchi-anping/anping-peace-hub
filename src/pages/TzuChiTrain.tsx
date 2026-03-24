@@ -15,12 +15,15 @@ import {
   TreePine,
   Home,
   BookOpen,
+  AlertCircle,
+  CheckCircle2,
 } from "lucide-react";
 import CountdownTimer from "@/components/CountdownTimer";
 import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
+  TZUCHI_TRAIN_IS_FULL,
 } from "@/lib/constants";
 
 const highlights = [
@@ -176,6 +179,19 @@ const TzuChiTrain = () => {
                   <span className="section-eyebrow">2026 安平聯區 · 兩天一夜</span>
                 </div>
 
+                {/* Sold-out notice — prominent, immediately visible */}
+                {TZUCHI_TRAIN_IS_FULL && (
+                  <div className="animate-fade-in-delay-1 flex items-start gap-3 px-4 py-4 bg-warm-amber/10 border border-warm-amber/40 rounded-xl">
+                    <AlertCircle className="w-5 h-5 text-warm-amber flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-foreground text-sm">名額已額滿・報名截止</p>
+                      <p className="text-sm text-muted-foreground mt-0.5">
+                        感恩各位的踴躍報名，本次列車名額已全數額滿。
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="animate-fade-in-delay-1 space-y-3">
                   <h1
                     className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground leading-[1.05] tracking-tight"
@@ -297,14 +313,36 @@ const TzuChiTrain = () => {
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ── Status Banner ── */}
       <section className="py-20 bg-gradient-to-b from-sage-light/10 to-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              「心」的旅程，從這裡開始
-            </h2>
-            <p className="text-muted-foreground">感恩您的熱情報名，本次列車名額已額滿，報名已截止。</p>
+          <div className="max-w-2xl mx-auto">
+            {TZUCHI_TRAIN_IS_FULL ? (
+              <div className="rounded-2xl border border-warm-amber/30 bg-warm-amber/8 px-8 py-10 text-center space-y-5">
+                <div className="flex justify-center">
+                  <div className="w-16 h-16 rounded-full bg-warm-amber/15 flex items-center justify-center">
+                    <CheckCircle2 className="w-8 h-8 text-warm-amber" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                    名額已全數額滿
+                  </h2>
+                  <p className="text-muted-foreground text-lg">報名已截止</p>
+                </div>
+                <p className="text-muted-foreground max-w-md mx-auto leading-relaxed">
+                  感恩各位的踴躍報名！本次列車名額已全數額滿。<br />
+                  期待與您在花蓮相聚，一同感受這趟心靈之旅。
+                </p>
+              </div>
+            ) : (
+              <div className="text-center space-y-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                  「心」的旅程，從這裡開始
+                </h2>
+                <p className="text-muted-foreground">立即報名，踏上這趟心靈之旅。</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -1,4 +1,4 @@
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
+  TZUCHI_TRAIN_IS_FULL,
 } from "@/lib/constants";
 
 const TzuChiTrainBanner = () => {
@@ -27,9 +28,12 @@ const TzuChiTrainBanner = () => {
               </div>
               {/* Content */}
               <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
-                <div className="inline-flex items-center gap-2 bg-warm-amber/10 px-3 py-1 rounded-full w-fit">
-                  <span className="text-xs font-medium text-warm-amber">已額滿</span>
-                </div>
+                {TZUCHI_TRAIN_IS_FULL && (
+                  <div className="inline-flex items-center gap-1.5 bg-warm-amber/15 border border-warm-amber/30 px-3 py-1.5 rounded-full w-fit">
+                    <AlertCircle className="w-3.5 h-3.5 text-warm-amber" />
+                    <span className="text-xs font-semibold text-warm-amber">名額已額滿・報名截止</span>
+                  </div>
+                )}
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground">
                   2026 安平聯區慈濟列車
                 </h3>

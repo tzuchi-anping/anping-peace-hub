@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import { CheckCircle } from "lucide-react";
 import {
   TZUCHI_TRAIN_REGISTRATION_DEADLINE_ISO,
   TZUCHI_TRAIN_DEPARTURE_ISO,
+  TZUCHI_TRAIN_IS_FULL,
 } from "@/lib/constants";
 
 interface TimeLeft {
@@ -120,6 +122,25 @@ function CountdownBlock({
   );
 }
 
+function SoldOutBlock() {
+  return (
+    <div className="flex-1 rounded-2xl border border-border/40 bg-muted/20 p-6 md:p-8 flex flex-col items-center gap-5 text-center">
+      <div>
+        <p className="text-xs tracking-[0.25em] uppercase font-semibold mb-1 text-muted-foreground/70">
+          報名狀態
+        </p>
+        <p className="text-sm text-muted-foreground">名額已全數額滿</p>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <div className="w-14 h-14 rounded-full bg-muted/60 flex items-center justify-center">
+          <CheckCircle className="w-7 h-7 text-muted-foreground/60" />
+        </div>
+        <p className="text-xl font-bold text-muted-foreground">報名已截止</p>
+      </div>
+    </div>
+  );
+}
+
 const CountdownTimer = () => (
   <section className="py-10 bg-background">
     <div className="container mx-auto px-4">
@@ -132,13 +153,17 @@ const CountdownTimer = () => (
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4">
-          <CountdownBlock
-            target={REGISTRATION_DEADLINE}
-            title="報名截止"
-            subtitle="2026 年 5 月 10 日 23:59（台北時間）"
-            accent="amber"
-            precision="minutes"
-          />
+          {TZUCHI_TRAIN_IS_FULL ? (
+            <SoldOutBlock />
+          ) : (
+            <CountdownBlock
+              target={REGISTRATION_DEADLINE}
+              title="報名截止"
+              subtitle="2026 年 5 月 10 日 23:59（台北時間）"
+              accent="amber"
+              precision="minutes"
+            />
+          )}
           <CountdownBlock
             target={DEPARTURE_DATE}
             title="出發在即"
