@@ -47,14 +47,12 @@ const TzuChiTrainBanner = () => {
                     {TZUCHI_TRAIN_REGISTRATION_DEADLINE}
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Button variant="outline" size="lg" className="group" asChild>
-                    <Link to="/tzuchi-train">
-                      了解更多
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </Button>
-                </div>
+                <Button variant="outline" size="lg" className="group mt-2" asChild>
+                  <Link to="/tzuchi-train">
+                    了解更多
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </Card>

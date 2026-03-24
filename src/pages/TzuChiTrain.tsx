@@ -7,6 +7,7 @@ import {
   Clock,
   MapPin,
   Train,
+  Heart,
   Sunrise,
   Moon,
   Utensils,
@@ -303,7 +304,7 @@ const TzuChiTrain = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               「心」的旅程，從這裡開始
             </h2>
-            <p className="text-muted-foreground">感謝您的熱情報名，本次列車名額已額滿，報名已截止。</p>
+            <p className="text-muted-foreground">感恩您的熱情報名，本次列車名額已額滿，報名已截止。</p>
           </div>
         </div>
       </section>
