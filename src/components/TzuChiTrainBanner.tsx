@@ -1,10 +1,9 @@
-import { Calendar, Clock, Train, Heart, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
-  TZUCHI_TRAIN_REGISTRATION_URL,
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
 } from "@/lib/constants";
@@ -29,7 +28,7 @@ const TzuChiTrainBanner = () => {
               {/* Content */}
               <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
                 <div className="inline-flex items-center gap-2 bg-warm-amber/10 px-3 py-1 rounded-full w-fit">
-                  <span className="text-xs font-medium text-warm-amber">熱烈報名中</span>
+                  <span className="text-xs font-medium text-warm-amber">已額滿</span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground">
                   2026 安平聯區慈濟列車
@@ -48,24 +47,12 @@ const TzuChiTrainBanner = () => {
                     {TZUCHI_TRAIN_REGISTRATION_DEADLINE}
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Button variant="warm" size="lg" className="group" asChild>
-                    <a
-                      href={TZUCHI_TRAIN_REGISTRATION_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Heart className="w-4 h-4" />
-                      立即報名
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="lg" className="group" asChild>
-                    <Link to="/tzuchi-train">
-                      了解更多
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </Button>
-                </div>
+                <Button variant="outline" size="lg" className="group mt-2" asChild>
+                  <Link to="/tzuchi-train">
+                    了解更多
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </Card>

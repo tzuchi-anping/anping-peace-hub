@@ -7,7 +7,6 @@ import {
   Clock,
   MapPin,
   Train,
-  ExternalLink,
   Heart,
   Sunrise,
   Moon,
@@ -20,7 +19,6 @@ import {
 import CountdownTimer from "@/components/CountdownTimer";
 import posterImage from "@/assets/tzuchi-train-2026.png";
 import {
-  TZUCHI_TRAIN_REGISTRATION_URL,
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_REGISTRATION_DEADLINE,
 } from "@/lib/constants";
@@ -194,13 +192,6 @@ const TzuChiTrain = () => {
                 </p>
 
                 <div className="flex flex-wrap gap-3 animate-fade-in-delay-3">
-                  <Button size="lg" variant="warm" className="group px-8" asChild>
-                    <a href={TZUCHI_TRAIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
-                      <Heart className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                      立即報名
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </Button>
                   <Button size="lg" variant="outline" asChild>
                     <a href="#schedule">
                       <Clock className="w-4 h-4" />
@@ -313,34 +304,13 @@ const TzuChiTrain = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               「心」的旅程，從這裡開始
             </h2>
-            <p className="text-muted-foreground">名額有限，請把握機會報名。報名截止：2026 年 5 月 10 日或額滿截止。</p>
-            <Button size="lg" variant="warm" className="group text-base px-10" asChild>
-              <a href={TZUCHI_TRAIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer">
-                <Heart className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                立即報名
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </Button>
+            <p className="text-muted-foreground">感恩您的熱情報名，本次列車名額已額滿，報名已截止。</p>
           </div>
         </div>
       </section>
 
       <Footer />
 
-      {/* Floating button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Button variant="warm" size="lg" className="shadow-2xl group" asChild>
-          <a
-            href={TZUCHI_TRAIN_REGISTRATION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2"
-          >
-            <Train className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            立即報名
-          </a>
-        </Button>
-      </div>
     </div>
   );
 };
