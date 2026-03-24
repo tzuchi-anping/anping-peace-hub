@@ -1,12 +1,8 @@
 # CLAUDE.md
 
-Project-level notes and conventions for Claude Code sessions.
-
 ## Dev Server
 
 - Run: `npm run dev`
-- **IPv6 not supported** in this environment. `vite.config.ts` uses `host: "0.0.0.0"` (IPv4).
-  If changed back to `host: "::"`, the server will fail with `EAFNOSUPPORT`.
 
 ## Browser Automation
 
@@ -18,40 +14,54 @@ Core workflow:
 3. `agent-browser click @e1` / `fill @e2 "text"` - Interact using refs
 4. Re-snapshot after page changes
 
-### Known Issues & Workarounds in This Environment
+---
 
-**agent-browser cannot auto-launch Chrome** (`Chrome not found` / `Auto-launch failed`).
-Attempting `agent-browser install` also fails (no internet access to download Chrome).
+## Remote Environment Workarounds (Claude Code on the web only)
 
-**Solution: Launch Chromium manually via CDP, then connect agent-browser to it.**
+> The following ONLY applies when running in Claude Code on the web
+> (i.e. `CLAUDE_CODE_REMOTE` environment variable is set).
+> Skip this section entirely for local Claude Code sessions.
+
+### IPv6 not supported
+
+`vite.config.ts` must use `host: "0.0.0.0"` (IPv4).
+If set to `host: "::"`, the server fails with `EAFNOSUPPORT`.
+
+### agent-browser cannot auto-launch Chrome
+
+`agent-browser install` fails (no internet to download Chrome).
+
+**Solution: Launch Playwright's bundled Chromium via CDP, then connect.**
 
 ```bash
-# 1. Launch the bundled Playwright Chromium with CDP enabled
+# 1. Launch Chromium with CDP
 /root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome \
   --headless --no-sandbox --disable-dev-shm-usage \
   --remote-debugging-port=9222 http://localhost:8080 &
 
-# 2. Verify CDP is ready
+# 2. Verify CDP
 curl -s http://localhost:9222/json
 
-# 3. Use agent-browser with --cdp flag for all commands
+# 3. All agent-browser commands need --cdp 9222
 agent-browser --cdp 9222 snapshot
 agent-browser --cdp 9222 screenshot page.png
-agent-browser --cdp 9222 click @e1
 ```
 
-**Navigation caveat**: `agent-browser --cdp 9222 open <url>` times out in this environment.
-Use JavaScript eval to navigate instead:
+### Navigation timeout workaround
+
+`agent-browser --cdp 9222 open <url>` times out. Use eval instead:
 
 ```bash
-agent-browser --cdp 9222 eval "window.location.href = 'http://localhost:8080/some-path'"
-# Then wait for React to render before interacting
+agent-browser --cdp 9222 eval "window.location.href = 'http://localhost:8080/path'"
 sleep 8
-agent-browser --cdp 9222 eval "document.readyState + ' | ' + document.querySelector('#root')?.innerHTML.length"
+agent-browser --cdp 9222 eval "document.readyState"
 ```
 
-**React SPA rendering**: After navigation via `window.location.href`, the page reloads and
-React needs time to hydrate. Wait until `document.readyState === 'complete'` and
-`#root` innerHTML length is > 0 before taking snapshots or screenshots.
+### React SPA hydration
 
-**dbus errors in Chromium output** are harmless — Chrome still works fine headlessly.
+After `window.location.href` navigation, wait for `document.readyState === 'complete'`
+and `#root` innerHTML length > 0 before snapshots.
+
+### dbus errors
+
+Chromium outputs dbus errors — harmless, ignore them.
