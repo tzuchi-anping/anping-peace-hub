@@ -8,15 +8,16 @@ import {
   ArrowRight,
   Store,
   UtensilsCrossed,
+  AlertCircle,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
 import posterPilgrimage from "@/assets/pilgrimage-2026.png";
 import plantopiaImage from "@/assets/plantopia-20260411.png";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
-  TZUCHI_TRAIN_REGISTRATION_DEADLINE,
   PLANTOPIA_REGISTRATION_URL,
   KID_MARKET_REGISTRATION_URL,
+  TZUCHI_TRAIN_IS_FULL,
 } from "./constants";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -131,14 +132,18 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     image: posterTrain,
     imageAlt: "2026 安平聯區慈濟列車海報",
     imageLink: "/tzuchi-train",
-    badge: { text: "已額滿", color: "warm-amber" },
+    badge: {
+      icon: TZUCHI_TRAIN_IS_FULL ? AlertCircle : undefined,
+      text: TZUCHI_TRAIN_IS_FULL ? "名額已額滿・報名截止" : "兩天一夜",
+      color: "warm-amber",
+    },
     title: "2026 安平聯區慈濟列車",
     subtitle: "花蓮「心」履行 — 兩天一夜心靈之旅",
     description:
       "遠離塵世的喧囂，放慢匆忙的腳步。邀請您搭上這班滿載溫暖的列車，回到「心靈的故鄉」——花蓮。",
     meta: [
       { icon: Calendar, text: TZUCHI_TRAIN_EVENT_DATE },
-      { icon: Clock, text: TZUCHI_TRAIN_REGISTRATION_DEADLINE },
+      { icon: Clock, text: TZUCHI_TRAIN_IS_FULL ? "報名已截止" : "5/10 或額滿截止" },
     ],
     actions: [
       {
