@@ -1,10 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Calendar,
+  CalendarPlus,
   Clock,
   MapPin,
   Flower2,
-  Sparkles,
+  Gift,
   ArrowRight,
   AlertCircle,
 } from "lucide-react";
@@ -61,27 +62,35 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     id: "bathing-buddha",
     image: posterBathingBuddha,
     imageAlt: "2026 浴佛大典海報",
-    badge: { icon: Flower2, text: "慈濟60周年", color: "sage" },
-    title: "與佛相遇",
-    subtitle: "2026 浴佛大典",
+    badge: { icon: Flower2, text: "浴佛大典・60 周年", color: "sage" },
+    title: "2026 浴佛大典",
+    subtitle: "與佛相遇 — 慈濟 60 周年",
     description:
-      "誠摯邀約大家來到安平聯絡處，洗滌心垢、祈求平安。今年更有慈濟 60 周年特別展出與豐富互動活動，邀您與家人一同前來祈福圓滿。",
+      "誠摯邀約大家來到安平聯絡處，洗滌心垢、祈求平安。今年更有慈濟 60 周年特別展出與豐富互動活動。",
     meta: [
       { icon: Calendar, text: "2026/05/10（日）" },
-      { icon: Clock, text: "社區浴佛場次 10:30・11:30・14:00（請提早 15 分鐘入場）" },
+      { icon: Clock, text: "社區場次 10:30・11:30・14:00" },
       { icon: MapPin, text: "慈濟安平聯絡處" },
     ],
     notice: {
       type: "list",
-      titleIcon: Sparkles,
+      titleIcon: Gift,
       title: "活動亮點",
       items: [
-        "互動體驗：花道手作、靜思語解籤",
-        "溫暖服務：淨手奉茶、平安麵結緣",
         "限量祝福：60 周年結緣品與壽桃",
+        "溫暖服務：淨手奉茶、平安麵結緣",
+        "互動體驗：花道手作、靜思語解籤",
+        "請提早 15 分鐘入場",
       ],
     },
-    actions: [],
+    actions: [
+      {
+        label: "加入行事曆",
+        href: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=2026%20%E6%B5%B4%E4%BD%9B%E5%A4%A7%E5%85%B8%EF%BC%88%E7%A4%BE%E5%8D%80%E5%A0%B4%E6%AC%A1%EF%BC%89&dates=20260510T023000Z%2F20260510T043000Z&details=%E8%88%87%E4%BD%9B%E7%9B%B8%E9%81%87%E2%80%94%E6%85%88%E6%BF%9F%2060%20%E5%91%A8%E5%B9%B4%E6%B5%B4%E4%BD%9B%E5%A4%A7%E5%85%B8%E3%80%82%E7%A4%BE%E5%8D%80%E5%A0%B4%E6%AC%A1%EF%BC%9A10%3A30%E3%80%8111%3A30%E3%80%8114%3A00%EF%BC%88%E8%AB%8B%E6%8F%90%E6%97%A9%2015%20%E5%88%86%E9%90%98%E5%85%A5%E5%A0%B4%EF%BC%89&location=%E6%85%88%E6%BF%9F%E5%AE%89%E5%B9%B3%E8%81%AF%E7%B5%A1%E8%99%95%EF%BC%88%E8%87%BA%E5%8D%97%E5%B8%82%E5%AE%89%E5%B9%B3%E5%8D%80%E5%9C%8B%E5%B9%B3%E8%B7%AF%20211%20%E8%99%9F%EF%BC%89",
+        variant: "warm",
+        leadingIcon: CalendarPlus,
+      },
+    ],
   },
 
   /* ── 慈濟列車 ── */
