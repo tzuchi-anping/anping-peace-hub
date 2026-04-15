@@ -9,7 +9,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
-import posterBathingBuddha from "@/assets/bathing-buddha-2026.png";
+import posterBathingBuddha from "@/assets/buddha-2026.jpg";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_IS_FULL,
