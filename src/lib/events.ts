@@ -3,20 +3,15 @@ import {
   Calendar,
   Clock,
   MapPin,
-  Leaf,
-  Footprints,
+  Flower2,
+  Sparkles,
   ArrowRight,
-  Store,
-  UtensilsCrossed,
   AlertCircle,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
-import posterPilgrimage from "@/assets/pilgrimage-2026.png";
-import plantopiaImage from "@/assets/plantopia-20260411.png";
+import posterBathingBuddha from "@/assets/bathing-buddha-2026.png";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
-  PLANTOPIA_REGISTRATION_URL,
-  KID_MARKET_REGISTRATION_URL,
   TZUCHI_TRAIN_IS_FULL,
 } from "./constants";
 
@@ -61,69 +56,32 @@ export type UpcomingEvent = {
 // 新增活動：在這裡加一筆 UpcomingEvent 物件即可，不需碰 UI 元件。
 
 export const UPCOMING_EVENTS: UpcomingEvent[] = [
-  /* ── 朝山經行 ── */
+  /* ── 2026 浴佛大典 ── */
   {
-    id: "pilgrimage",
-    image: posterPilgrimage,
-    imageAlt: "2026 朝山經行海報",
-    badge: { icon: Footprints, text: "慈濟60周年", color: "sage" },
-    title: "朝山經行",
-    subtitle: "六十行願，一念初心",
+    id: "bathing-buddha",
+    image: posterBathingBuddha,
+    imageAlt: "2026 浴佛大典海報",
+    badge: { icon: Flower2, text: "慈濟60周年", color: "sage" },
+    title: "與佛相遇",
+    subtitle: "2026 浴佛大典",
     description:
-      "在這特別的時刻，邀請您用雙腳走一段路，在步步經行中，與心對話、與法相應。",
+      "誠摯邀約大家來到安平聯絡處，洗滌心垢、祈求平安。今年更有慈濟 60 周年特別展出與豐富互動活動，邀您與家人一同前來祈福圓滿。",
     meta: [
-      { icon: Calendar, text: "2026/04/12（日）" },
-      { icon: Clock, text: "15:00 ~ 17:30" },
+      { icon: Calendar, text: "2026/05/10（日）" },
+      { icon: Clock, text: "社區浴佛場次 10:30・11:30・14:00（請提早 15 分鐘入場）" },
       { icon: MapPin, text: "慈濟安平聯絡處" },
     ],
     notice: {
       type: "list",
-      titleIcon: Leaf,
-      title: "活動提醒",
+      titleIcon: Sparkles,
+      title: "活動亮點",
       items: [
-        "戶外經行，不脫鞋，請穿著舒適包鞋",
-        "建議穿著：長袖藍衣藍褲或灰衣藍褲",
-        "攜帶物品：輕便背包、水杯、個人藥品",
-        "雨天備案：移至佛堂禮拜《三十七助道品》（請攜帶襪套）",
+        "互動體驗：花道手作、靜思語解籤",
+        "溫暖服務：淨手奉茶、平安麵結緣",
+        "限量祝福：60 周年結緣品與壽桃",
       ],
     },
     actions: [],
-  },
-
-  /* ── 植托邦蔬食市集 × 小老闆市集 ── */
-  {
-    id: "plantopia",
-    image: plantopiaImage,
-    imageAlt: "植托邦蔬食市集海報",
-    badge: { icon: Leaf, text: "蔬食護生・環保永續", color: "sage" },
-    title: "植托邦蔬食市集 × 小老闆市集",
-    description:
-      "以「蔬食護生、環保永續」為核心，打造蔬食者盡情徜徉的饗食天堂。攜手小老闆市集，讓孩子透過擺攤延續物命、學習規劃與珍惜。",
-    meta: [
-      { icon: Calendar, text: "2026/04/11（六）" },
-      { icon: Clock, text: "14:00 – 19:00" },
-      { icon: MapPin, text: "慈濟安平聯絡處" },
-    ],
-    notice: {
-      type: "banner",
-      icon: UtensilsCrossed,
-      text: "響應無痕生活，請自備環保餐具、碗筷及杯子",
-      color: "warm-amber",
-    },
-    actions: [
-      {
-        label: "植托邦擺攤報名",
-        href: PLANTOPIA_REGISTRATION_URL,
-        variant: "warm",
-        leadingIcon: Store,
-      },
-      {
-        label: "小老闆擺攤報名",
-        href: KID_MARKET_REGISTRATION_URL,
-        variant: "outline",
-        leadingIcon: Store,
-      },
-    ],
   },
 
   /* ── 慈濟列車 ── */
