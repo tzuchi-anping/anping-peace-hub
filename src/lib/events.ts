@@ -44,15 +44,18 @@ export type UpcomingEvent = {
   imageAlt: string;
   /** 有值時圖片可點擊，連到站內頁面 */
   imageLink?: string;
-  /** "cover"（預設）會裁切以填滿欄位；"contain" 完整保留海報內容（適合橫式海報） */
+  /**
+   * "cover"（預設）會裁切以填滿欄位；"contain" 完整保留海報內容（適合橫式海報）。
+   * 搭配 "contain" 時，元件會自動加上柔和的 sage 漸層背景填補 letterbox 區域。
+   */
   imageFit?: "cover" | "contain";
   badge: { icon?: LucideIcon; text: string; color: BadgeColor };
   title: string;
   subtitle?: string;
   description: string;
   meta: Array<{ icon: LucideIcon; text: string }>;
-  /** 可放多個提醒區塊（場次表 + 亮點等） */
-  notices?: EventNotice[];
+  /** 提醒區塊清單（場次表 + 亮點等）；無提醒時傳空陣列 */
+  notices: EventNotice[];
   actions: EventAction[];
 };
 
@@ -127,6 +130,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
       { icon: Calendar, text: TZUCHI_TRAIN_EVENT_DATE },
       { icon: Clock, text: TZUCHI_TRAIN_IS_FULL ? "報名已截止" : "5/10 或額滿截止" },
     ],
+    notices: [],
     actions: [
       {
         label: "了解更多",
