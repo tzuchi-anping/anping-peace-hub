@@ -44,12 +44,15 @@ export type UpcomingEvent = {
   imageAlt: string;
   /** 有值時圖片可點擊，連到站內頁面 */
   imageLink?: string;
+  /** "cover"（預設）會裁切以填滿欄位；"contain" 完整保留海報內容（適合橫式海報） */
+  imageFit?: "cover" | "contain";
   badge: { icon?: LucideIcon; text: string; color: BadgeColor };
   title: string;
   subtitle?: string;
   description: string;
   meta: Array<{ icon: LucideIcon; text: string }>;
-  notice?: EventNotice;
+  /** 可放多個提醒區塊（場次表 + 亮點等） */
+  notices?: EventNotice[];
   actions: EventAction[];
 };
 
@@ -62,6 +65,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     id: "bathing-buddha",
     image: posterBathingBuddha,
     imageAlt: "2026 浴佛大典海報",
+    imageFit: "contain",
     badge: { icon: Flower2, text: "浴佛大典・60 周年", color: "sage" },
     title: "2026 浴佛大典",
     subtitle: "與佛相遇 — 慈濟 60 周年",
@@ -69,20 +73,31 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
       "誠摯邀約大家來到安平聯絡處，洗滌心垢、祈求平安。今年更有慈濟 60 周年特別展出與豐富互動活動。",
     meta: [
       { icon: Calendar, text: "2026/05/10（日）" },
-      { icon: Clock, text: "社區場次 10:30・11:30・14:00" },
       { icon: MapPin, text: "慈濟安平聯絡處" },
     ],
-    notice: {
-      type: "list",
-      titleIcon: Gift,
-      title: "活動亮點",
-      items: [
-        "限量祝福：60 周年結緣品與壽桃",
-        "溫暖服務：淨手奉茶、平安麵結緣",
-        "互動體驗：花道手作、靜思語解籤",
-        "請提早 15 分鐘入場",
-      ],
-    },
+    notices: [
+      {
+        type: "list",
+        titleIcon: Clock,
+        title: "活動場次",
+        items: [
+          "07:00 浴佛大典・慈誠委員連線場次（06:30 入場・1F 佛堂）",
+          "09:00 六十周年慶大會（1F 佛堂）",
+          "10:30・11:30・14:00 浴佛大典・社區場次（請提早 15 分鐘入場）",
+          "10:30 後・平安麵於環保教育站結緣",
+        ],
+      },
+      {
+        type: "list",
+        titleIcon: Gift,
+        title: "活動亮點",
+        items: [
+          "限量祝福：60 周年結緣品與壽桃",
+          "溫暖服務：淨手奉茶、平安麵結緣",
+          "互動體驗：花道手作、靜思語解籤",
+        ],
+      },
+    ],
     actions: [
       {
         label: "加入行事曆",

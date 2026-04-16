@@ -106,29 +106,34 @@ const UpcomingEvents = () => {
 // ─── EventSlide ──────────────────────────────────────────────────────────────
 
 const EventSlide = ({
-  image, imageAlt, imageLink,
+  image, imageAlt, imageLink, imageFit = "cover",
   badge, title, subtitle, description,
-  meta, notice, actions,
+  meta, notices, actions,
 }: UpcomingEvent) => {
   const badgeStyle = BADGE_STYLES[badge.color];
   const BadgeIcon = badge.icon;
+  const fitClass = imageFit === "contain" ? "object-contain" : "object-cover";
+  // contain 模式給海報一個柔和背景，避免 letterbox 留白看起來空蕩
+  const containerClass = imageFit === "contain"
+    ? "md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden bg-gradient-to-b from-sage-light/20 to-sage/5 flex items-center justify-center"
+    : "md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden";
 
   return (
     <Card className={SLIDE_CARD_CLASS}>
       <div className="flex flex-col md:flex-row flex-1">
         {/* 左側圖片 */}
-        <div className="md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden">
+        <div className={containerClass}>
           {imageLink ? (
-            <Link to={imageLink} className="block h-full">
+            <Link to={imageLink} className="block w-full h-full">
               <img
                 src={image}
                 alt={imageAlt}
                 loading="lazy"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                className={`w-full h-full ${fitClass} hover:scale-105 transition-transform duration-500`}
               />
             </Link>
           ) : (
-            <img src={image} alt={imageAlt} loading="lazy" className="w-full h-full object-cover" />
+            <img src={image} alt={imageAlt} loading="lazy" className={`w-full h-full ${fitClass}`} />
           )}
         </div>
 
@@ -157,7 +162,7 @@ const EventSlide = ({
           </div>
 
           {/* 活動提醒 */}
-          {notice && <NoticeBlock notice={notice} />}
+          {notices?.map((notice, i) => <NoticeBlock key={i} notice={notice} />)}
 
           {/* 按鈕 */}
           {actions.length > 0 && (
