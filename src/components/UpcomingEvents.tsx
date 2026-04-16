@@ -11,6 +11,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { type UpcomingEvent, type EventNotice, UPCOMING_EVENTS } from "@/lib/events";
+import { cn } from "@/lib/utils";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -106,29 +107,43 @@ const UpcomingEvents = () => {
 // ─── EventSlide ──────────────────────────────────────────────────────────────
 
 const EventSlide = ({
-  image, imageAlt, imageLink,
+  image, imageAlt, imageLink, imageFit = "cover",
   badge, title, subtitle, description,
-  meta, notice, actions,
+  meta, notices, actions,
 }: UpcomingEvent) => {
   const badgeStyle = BADGE_STYLES[badge.color];
   const BadgeIcon = badge.icon;
+  const isContain = imageFit === "contain";
+  // contain 模式給海報一個柔和背景，避免 letterbox 留白看起來空蕩
+  const imageEl = (
+    <img
+      src={image}
+      alt={imageAlt}
+      loading="lazy"
+      className={cn(
+        "w-full h-full",
+        isContain ? "object-contain" : "object-cover",
+        imageLink && "hover:scale-105 transition-transform duration-500",
+      )}
+    />
+  );
 
   return (
     <Card className={SLIDE_CARD_CLASS}>
       <div className="flex flex-col md:flex-row flex-1">
         {/* 左側圖片 */}
-        <div className="md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden">
+        <div
+          className={cn(
+            "md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden",
+            isContain && "bg-gradient-to-b from-sage-light/20 to-sage/5 flex items-center justify-center",
+          )}
+        >
           {imageLink ? (
-            <Link to={imageLink} className="block h-full">
-              <img
-                src={image}
-                alt={imageAlt}
-                loading="lazy"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
+            <Link to={imageLink} className="block w-full h-full">
+              {imageEl}
             </Link>
           ) : (
-            <img src={image} alt={imageAlt} loading="lazy" className="w-full h-full object-cover" />
+            imageEl
           )}
         </div>
 
@@ -157,7 +172,7 @@ const EventSlide = ({
           </div>
 
           {/* 活動提醒 */}
-          {notice && <NoticeBlock notice={notice} />}
+          {notices.map((notice, i) => <NoticeBlock key={i} notice={notice} />)}
 
           {/* 按鈕 */}
           {actions.length > 0 && (

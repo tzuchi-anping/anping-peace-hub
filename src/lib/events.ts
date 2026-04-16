@@ -1,22 +1,18 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Calendar,
+  CalendarPlus,
   Clock,
   MapPin,
-  Leaf,
-  Footprints,
+  Flower2,
+  Gift,
   ArrowRight,
-  Store,
-  UtensilsCrossed,
   AlertCircle,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
-import posterPilgrimage from "@/assets/pilgrimage-2026.png";
-import plantopiaImage from "@/assets/plantopia-20260411.png";
+import posterBathingBuddha from "@/assets/buddha-2026.jpg";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
-  PLANTOPIA_REGISTRATION_URL,
-  KID_MARKET_REGISTRATION_URL,
   TZUCHI_TRAIN_IS_FULL,
 } from "./constants";
 
@@ -48,12 +44,18 @@ export type UpcomingEvent = {
   imageAlt: string;
   /** 有值時圖片可點擊，連到站內頁面 */
   imageLink?: string;
+  /**
+   * "cover"（預設）會裁切以填滿欄位；"contain" 完整保留海報內容（適合橫式海報）。
+   * 搭配 "contain" 時，元件會自動加上柔和的 sage 漸層背景填補 letterbox 區域。
+   */
+  imageFit?: "cover" | "contain";
   badge: { icon?: LucideIcon; text: string; color: BadgeColor };
   title: string;
   subtitle?: string;
   description: string;
   meta: Array<{ icon: LucideIcon; text: string }>;
-  notice?: EventNotice;
+  /** 提醒區塊清單（場次表 + 亮點等）；無提醒時傳空陣列 */
+  notices: EventNotice[];
   actions: EventAction[];
 };
 
@@ -61,67 +63,50 @@ export type UpcomingEvent = {
 // 新增活動：在這裡加一筆 UpcomingEvent 物件即可，不需碰 UI 元件。
 
 export const UPCOMING_EVENTS: UpcomingEvent[] = [
-  /* ── 朝山經行 ── */
+  /* ── 2026 浴佛大典 ── */
   {
-    id: "pilgrimage",
-    image: posterPilgrimage,
-    imageAlt: "2026 朝山經行海報",
-    badge: { icon: Footprints, text: "慈濟60周年", color: "sage" },
-    title: "朝山經行",
-    subtitle: "六十行願，一念初心",
+    id: "bathing-buddha",
+    image: posterBathingBuddha,
+    imageAlt: "2026 浴佛大典海報",
+    imageFit: "contain",
+    badge: { icon: Flower2, text: "浴佛大典・60 周年", color: "sage" },
+    title: "2026 浴佛大典",
+    subtitle: "與佛相遇 — 慈濟 60 周年",
     description:
-      "在這特別的時刻，邀請您用雙腳走一段路，在步步經行中，與心對話、與法相應。",
+      "誠摯邀約大家來到安平聯絡處，洗滌心垢、祈求平安。今年更有慈濟 60 周年特別展出與豐富互動活動。",
     meta: [
-      { icon: Calendar, text: "2026/04/12（日）" },
-      { icon: Clock, text: "15:00 ~ 17:30" },
+      { icon: Calendar, text: "2026/05/10（日）" },
       { icon: MapPin, text: "慈濟安平聯絡處" },
     ],
-    notice: {
-      type: "list",
-      titleIcon: Leaf,
-      title: "活動提醒",
-      items: [
-        "戶外經行，不脫鞋，請穿著舒適包鞋",
-        "建議穿著：長袖藍衣藍褲或灰衣藍褲",
-        "攜帶物品：輕便背包、水杯、個人藥品",
-        "雨天備案：移至佛堂禮拜《三十七助道品》（請攜帶襪套）",
-      ],
-    },
-    actions: [],
-  },
-
-  /* ── 植托邦蔬食市集 × 小老闆市集 ── */
-  {
-    id: "plantopia",
-    image: plantopiaImage,
-    imageAlt: "植托邦蔬食市集海報",
-    badge: { icon: Leaf, text: "蔬食護生・環保永續", color: "sage" },
-    title: "植托邦蔬食市集 × 小老闆市集",
-    description:
-      "以「蔬食護生、環保永續」為核心，打造蔬食者盡情徜徉的饗食天堂。攜手小老闆市集，讓孩子透過擺攤延續物命、學習規劃與珍惜。",
-    meta: [
-      { icon: Calendar, text: "2026/04/11（六）" },
-      { icon: Clock, text: "14:00 – 19:00" },
-      { icon: MapPin, text: "慈濟安平聯絡處" },
-    ],
-    notice: {
-      type: "banner",
-      icon: UtensilsCrossed,
-      text: "響應無痕生活，請自備環保餐具、碗筷及杯子",
-      color: "warm-amber",
-    },
-    actions: [
+    notices: [
       {
-        label: "植托邦擺攤報名",
-        href: PLANTOPIA_REGISTRATION_URL,
-        variant: "warm",
-        leadingIcon: Store,
+        type: "list",
+        titleIcon: Clock,
+        title: "活動場次",
+        items: [
+          "07:00 浴佛大典・慈誠委員連線場次（06:30 入場・1F 佛堂）",
+          "09:00 六十周年慶大會（1F 佛堂）",
+          "10:30・11:30・14:00 浴佛大典・社區場次（請提早 15 分鐘入場）",
+          "10:30 後・平安麵於環保教育站結緣",
+        ],
       },
       {
-        label: "小老闆擺攤報名",
-        href: KID_MARKET_REGISTRATION_URL,
-        variant: "outline",
-        leadingIcon: Store,
+        type: "list",
+        titleIcon: Gift,
+        title: "活動亮點",
+        items: [
+          "限量祝福：60 周年結緣品與壽桃",
+          "溫暖服務：淨手奉茶、平安麵結緣",
+          "互動體驗：花道手作、靜思語解籤",
+        ],
+      },
+    ],
+    actions: [
+      {
+        label: "加入行事曆",
+        href: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=2026%20%E6%B5%B4%E4%BD%9B%E5%A4%A7%E5%85%B8%EF%BC%88%E7%A4%BE%E5%8D%80%E5%A0%B4%E6%AC%A1%EF%BC%89&dates=20260510T023000Z%2F20260510T043000Z&details=%E8%88%87%E4%BD%9B%E7%9B%B8%E9%81%87%E2%80%94%E6%85%88%E6%BF%9F%2060%20%E5%91%A8%E5%B9%B4%E6%B5%B4%E4%BD%9B%E5%A4%A7%E5%85%B8%E3%80%82%E7%A4%BE%E5%8D%80%E5%A0%B4%E6%AC%A1%EF%BC%9A10%3A30%E3%80%8111%3A30%E3%80%8114%3A00%EF%BC%88%E8%AB%8B%E6%8F%90%E6%97%A9%2015%20%E5%88%86%E9%90%98%E5%85%A5%E5%A0%B4%EF%BC%89&location=%E6%85%88%E6%BF%9F%E5%AE%89%E5%B9%B3%E8%81%AF%E7%B5%A1%E8%99%95%EF%BC%88%E8%87%BA%E5%8D%97%E5%B8%82%E5%AE%89%E5%B9%B3%E5%8D%80%E5%9C%8B%E5%B9%B3%E8%B7%AF%20211%20%E8%99%9F%EF%BC%89",
+        variant: "warm",
+        leadingIcon: CalendarPlus,
       },
     ],
   },
@@ -145,6 +130,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
       { icon: Calendar, text: TZUCHI_TRAIN_EVENT_DATE },
       { icon: Clock, text: TZUCHI_TRAIN_IS_FULL ? "報名已截止" : "5/10 或額滿截止" },
     ],
+    notices: [],
     actions: [
       {
         label: "了解更多",
