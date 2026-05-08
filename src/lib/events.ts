@@ -8,9 +8,12 @@ import {
   Gift,
   ArrowRight,
   AlertCircle,
+  Leaf,
+  ExternalLink,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
 import posterBathingBuddha from "@/assets/buddha-2026.jpg";
+import posterAfforestation from "@/assets/afforestation.jpg";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_IS_FULL,
@@ -63,6 +66,50 @@ export type UpcomingEvent = {
 // 新增活動：在這裡加一筆 UpcomingEvent 物件即可，不需碰 UI 元件。
 
 export const UPCOMING_EVENTS: UpcomingEvent[] = [
+  /* ── 玩市集 種森林 ── */
+  {
+    id: "afforestation-market",
+    image: posterAfforestation,
+    imageAlt: "玩市集 種森林・植托邦市集海報",
+    imageFit: "contain",
+    badge: { icon: Leaf, text: "植托邦市集・一野森林合辦", color: "sage" },
+    title: "玩市集 種森林",
+    subtitle: "尋覓城市森林，就在植托邦市集！",
+    description:
+      "一場關於「宮脇森林」的探索旅程即將展開。完成 6 道森林大地遊戲關卡，蒐集線索、拼湊森林樣貌，最終親手種下專屬樹苗，一起種出屬於我們的森林！邀請你一起用行動「玩」出森林，見證綠意在你我日常中延續。",
+    meta: [
+      { icon: Calendar, text: "2026/06/06（六）16:00–19:00（市集至 20:00）" },
+      { icon: MapPin, text: "慈濟安平聯絡處（台南市安平區國平路 211 號）" },
+    ],
+    notices: [
+      {
+        type: "list",
+        titleIcon: Leaf,
+        title: "何謂宮脇森林",
+        items: [
+          "由日本植物學家宮脇昭博士所開創，是聯合國公認有效的自然解方（NbS）",
+          "將原生樹種密集種植，讓樹木形成能互相幫助、強韌共生的「超級有機體」",
+          "以十年長成百年森林的速度，讓城市土地快速轉化為具備生命力的綠色場域",
+        ],
+      },
+    ],
+    actions: [
+      {
+        label: "活動報名",
+        href: "https://forms.gle/yMXrfLHvR2hDcEBq6",
+        variant: "warm",
+        leadingIcon: ExternalLink,
+      },
+      {
+        label: "攤商報名",
+        href: "https://tally.so/r/1AXodW",
+        variant: "outline",
+        trailingIcon: ArrowRight,
+        trailingIconClass: "group-hover:translate-x-0.5 transition-transform",
+      },
+    ],
+  },
+
   /* ── 2026 浴佛大典 ── */
   {
     id: "bathing-buddha",
