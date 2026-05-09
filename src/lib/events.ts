@@ -67,6 +67,8 @@ export type UpcomingEvent = {
   actions: EventAction[];
 };
 
+const ARROW_HOVER_CLASS = "group-hover:translate-x-0.5 transition-transform";
+
 // ─── Data ────────────────────────────────────────────────────────────────────
 // 新增活動：在這裡加一筆 UpcomingEvent 物件即可，不需碰 UI 元件。
 
@@ -158,7 +160,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
         href: PLANTOPIA_REGISTRATION_URL,
         variant: "outline",
         trailingIcon: ArrowRight,
-        trailingIconClass: "group-hover:translate-x-0.5 transition-transform",
+        trailingIconClass: ARROW_HOVER_CLASS,
       },
     ],
   },
@@ -241,7 +243,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
         href: "/tzuchi-train",
         variant: "outline",
         trailingIcon: ArrowRight,
-        trailingIconClass: "group-hover:translate-x-0.5 transition-transform",
+        trailingIconClass: ARROW_HOVER_CLASS,
         isInternal: true,
       },
     ],

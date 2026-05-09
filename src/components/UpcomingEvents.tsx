@@ -66,10 +66,13 @@ const UpcomingEvents = () => {
         <div className="max-w-5xl mx-auto">
           <Carousel
             setApi={setApi}
-            opts={{ loop: true }}
+            opts={{ loop: true, watchResize: true }}
             className="w-full"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+            onTouchCancel={() => setIsPaused(false)}
           >
             <CarouselContent>
               {UPCOMING_EVENTS.map((event) => (
@@ -84,20 +87,24 @@ const UpcomingEvents = () => {
           </Carousel>
 
           {/* Dot indicators */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center items-center gap-1 mt-6">
             {UPCOMING_EVENTS.map((_, i) => (
               <button
                 key={i}
                 onClick={() => api?.scrollTo(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  i === current
-                    ? "bg-sage w-6"
-                    : "bg-sage/30 hover:bg-sage/50"
-                }`}
+                className="p-2 -m-1 touch-manipulation"
                 aria-label={`前往第 ${i + 1} 張`}
-              />
+              >
+                <span className={cn(
+                  "block rounded-full transition-all duration-300 h-2.5",
+                  i === current ? "bg-sage w-6" : "w-2.5 bg-sage/30 hover:bg-sage/50",
+                )} />
+              </button>
             ))}
           </div>
+          <p className="text-center text-xs text-muted-foreground/50 mt-2 md:hidden select-none">
+            左右滑動切換活動
+          </p>
         </div>
       </div>
     </section>
@@ -119,7 +126,7 @@ const EventSlide = ({
     <img
       src={image}
       alt={imageAlt}
-      loading="lazy"
+      loading="eager"
       className={cn(
         "w-full h-full",
         isContain ? "object-contain" : "object-cover",
@@ -134,7 +141,7 @@ const EventSlide = ({
         {/* 左側圖片 */}
         <div
           className={cn(
-            "md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden",
+            "h-52 sm:h-64 md:h-auto md:w-2/5 lg:w-1/3 flex-shrink-0 overflow-hidden",
             isContain && "bg-gradient-to-b from-sage-light/20 to-sage/5 flex items-center justify-center",
           )}
         >
