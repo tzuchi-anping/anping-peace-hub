@@ -6,7 +6,7 @@ import path from "path";
 export default defineConfig(() => ({
   base: "/",
   server: {
-    host: "0.0.0.0",
+    host: process.env.CLAUDE_CODE_REMOTE ? "0.0.0.0" : "::",
     port: 8080,
   },
   plugins: [react()],
