@@ -16,3 +16,6 @@ export const KID_MARKET_REGISTRATION_URL =
 // Afforestation market event constants
 export const AFFORESTATION_REGISTRATION_URL = "https://forms.gle/yMXrfLHvR2hDcEBq6";
 
+// Chinese music concert event constants
+export const CHINESE_MUSIC_CONCERT_REGISTRATION_URL = "https://lin.ee/etc0uYZ";
+

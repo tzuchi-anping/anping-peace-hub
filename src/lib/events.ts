@@ -10,15 +10,18 @@ import {
   AlertCircle,
   Leaf,
   ExternalLink,
+  Music2,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
 import posterBathingBuddha from "@/assets/buddha-2026.jpg";
 import posterAfforestation from "@/assets/afforestation.jpg";
+import posterChineseMusicConcert from "@/assets/2026ChineseMusicConcert.jpg";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_IS_FULL,
   AFFORESTATION_REGISTRATION_URL,
   PLANTOPIA_REGISTRATION_URL,
+  CHINESE_MUSIC_CONCERT_REGISTRATION_URL,
 } from "./constants";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -129,7 +132,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
       "一場關於「宮脇森林」的探索旅程即將展開。完成 6 道森林大地遊戲關卡，蒐集線索、拼湊森林樣貌，最終親手種下專屬樹苗，一起種出屬於我們的森林！邀請你一起用行動「玩」出森林，見證綠意在你我日常中延續。",
     meta: [
       { icon: Calendar, text: "2026/06/06（六）16:00–19:00（市集至 20:00）" },
-      { icon: MapPin, text: "慈濟安平聯絡處（台南市安平區國平路 211 號）" },
+      { icon: MapPin, text: "慈濟安平聯絡處" },
     ],
     notices: [
       {
@@ -156,6 +159,58 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
         variant: "outline",
         trailingIcon: ArrowRight,
         trailingIconClass: "group-hover:translate-x-0.5 transition-transform",
+      },
+    ],
+  },
+
+  /* ── 六月國樂音樂會 ── */
+  {
+    id: "chinese-music-concert",
+    image: posterChineseMusicConcert,
+    imageAlt: "弦心弦意在人間・六月音樂會海報",
+    imageFit: "contain",
+    badge: { icon: Music2, text: "慈濟安平聯區・國樂團", color: "sage" },
+    title: "弦心弦意在人間・六月音樂會",
+    subtitle: "用音樂走一段愛的人間路",
+    description:
+      "慈濟安平聯絡處國樂團，攜手王雪真師姊手語團隊，於六月初夏夜晚獻上一場充滿愛與溫度的音樂饗宴。免費入場，誠摯邀請您蒞臨聆聽。",
+    meta: [
+      { icon: Calendar, text: "2026/06/06（六）19:30–21:00" },
+      { icon: MapPin, text: "慈濟安平聯絡處" },
+    ],
+    notices: [
+      {
+        type: "list",
+        titleIcon: Music2,
+        title: "演奏曲目",
+        items: [
+          "愛和關懷",
+          "因緣",
+          "把愛找回來",
+          "愛灑人間",
+          "誠心祈三願",
+          "心願＋手語",
+          "人間有愛＋手語",
+          "千手世界＋手語",
+          "立願文",
+          "問心",
+          "悲欣交集在心蓮",
+          "祈禱",
+        ],
+      },
+      {
+        type: "banner",
+        icon: Gift,
+        text: "透過官方 LINE 完成報名，限量贈送精油防蚊磚 100 份（音樂會當日現場領取，每人限領乙份，送完為止）",
+        color: "sage",
+      },
+    ],
+    actions: [
+      {
+        label: "LINE 立即報名",
+        href: CHINESE_MUSIC_CONCERT_REGISTRATION_URL,
+        variant: "warm",
+        leadingIcon: ExternalLink,
       },
     ],
   },
