@@ -17,6 +17,8 @@ import posterAfforestation from "@/assets/afforestation.jpg";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_IS_FULL,
+  AFFORESTATION_REGISTRATION_URL,
+  PLANTOPIA_REGISTRATION_URL,
 } from "./constants";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -144,13 +146,13 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     actions: [
       {
         label: "活動報名",
-        href: "https://forms.gle/yMXrfLHvR2hDcEBq6",
+        href: AFFORESTATION_REGISTRATION_URL,
         variant: "warm",
         leadingIcon: ExternalLink,
       },
       {
         label: "攤商報名",
-        href: "https://tally.so/r/1AXodW",
+        href: PLANTOPIA_REGISTRATION_URL,
         variant: "outline",
         trailingIcon: ArrowRight,
         trailingIconClass: "group-hover:translate-x-0.5 transition-transform",
