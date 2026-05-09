@@ -21,6 +21,7 @@ import {
   TZUCHI_TRAIN_IS_FULL,
   AFFORESTATION_REGISTRATION_URL,
   PLANTOPIA_REGISTRATION_URL,
+  CHINESE_MUSIC_CONCERT_REGISTRATION_URL,
 } from "./constants";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -207,7 +208,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
     actions: [
       {
         label: "LINE 立即報名",
-        href: "https://lin.ee/etc0uYZ",
+        href: CHINESE_MUSIC_CONCERT_REGISTRATION_URL,
         variant: "warm",
         leadingIcon: ExternalLink,
       },
