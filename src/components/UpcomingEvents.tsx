@@ -72,6 +72,7 @@ const UpcomingEvents = () => {
             onMouseLeave={() => setIsPaused(false)}
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
+            onTouchCancel={() => setIsPaused(false)}
           >
             <CarouselContent>
               {UPCOMING_EVENTS.map((event) => (
@@ -94,11 +95,10 @@ const UpcomingEvents = () => {
                 className="p-2 -m-1 touch-manipulation"
                 aria-label={`前往第 ${i + 1} 張`}
               >
-                <span className={`block rounded-full transition-all duration-300 h-2.5 ${
-                  i === current
-                    ? "bg-sage w-6"
-                    : "w-2.5 bg-sage/30 hover:bg-sage/50"
-                }`} />
+                <span className={cn(
+                  "block rounded-full transition-all duration-300 h-2.5",
+                  i === current ? "bg-sage w-6" : "w-2.5 bg-sage/30 hover:bg-sage/50",
+                )} />
               </button>
             ))}
           </div>
