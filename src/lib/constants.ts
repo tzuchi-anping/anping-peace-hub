@@ -13,3 +13,6 @@ export const PLANTOPIA_REGISTRATION_URL = "https://tally.so/r/1AXodW";
 export const KID_MARKET_REGISTRATION_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSfw-P_T6gp_9yTjd8iN4AvakCGA4SzFbDaLkAaKYh1M_CiJaA/viewform";
 
+// Afforestation market event constants
+export const AFFORESTATION_REGISTRATION_URL = "https://forms.gle/yMXrfLHvR2hDcEBq6";
+
