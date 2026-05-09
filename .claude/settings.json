@@ -7,6 +7,10 @@
           {
             "type": "command",
             "command": "if [ -n \"$CLAUDE_CODE_REMOTE\" ] && [ ! -d \".claude/skills/agent-browser\" ]; then npx -y skills add vercel-labs/agent-browser -a claude-code -y; fi"
+          },
+          {
+            "type": "command",
+            "command": "[ -n \"$CLAUDE_CODE_REMOTE\" ] && CHROME=$(find /opt/pw-browsers -name chrome -type f | head -1) && $CHROME --headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 about:blank &"
           }
         ]
       }

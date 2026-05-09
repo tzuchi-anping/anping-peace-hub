@@ -24,8 +24,8 @@ Core workflow:
 
 ### IPv6 not supported
 
-`vite.config.ts` must use `host: "0.0.0.0"` (IPv4).
-If set to `host: "::"`, the server fails with `EAFNOSUPPORT`.
+`vite.config.ts` uses `process.env.CLAUDE_CODE_REMOTE` to switch host to `"0.0.0.0"` (IPv4).
+No manual change needed — the env var is set automatically in this environment.
 
 ### agent-browser cannot auto-launch Chrome
 
@@ -35,7 +35,7 @@ If set to `host: "::"`, the server fails with `EAFNOSUPPORT`.
 
 ```bash
 # 1. Find and launch Chromium with CDP (version-independent path)
-CHROME=$(find /root/.cache/ms-playwright -name chrome -type f | head -1)
+CHROME=$(find /opt/pw-browsers -name chrome -type f | head -1)
 $CHROME --headless --no-sandbox --disable-dev-shm-usage \
   --remote-debugging-port=9222 http://localhost:8080 &
 
