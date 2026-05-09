@@ -131,7 +131,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
       "一場關於「宮脇森林」的探索旅程即將展開。完成 6 道森林大地遊戲關卡，蒐集線索、拼湊森林樣貌，最終親手種下專屬樹苗，一起種出屬於我們的森林！邀請你一起用行動「玩」出森林，見證綠意在你我日常中延續。",
     meta: [
       { icon: Calendar, text: "2026/06/06（六）16:00–19:00（市集至 20:00）" },
-      { icon: MapPin, text: "慈濟安平聯絡處（台南市安平區國平路 211 號）" },
+      { icon: MapPin, text: "慈濟安平聯絡處" },
     ],
     notices: [
       {
@@ -175,7 +175,7 @@ export const UPCOMING_EVENTS: UpcomingEvent[] = [
       "慈濟安平聯絡處國樂團，攜手王雪真師姊手語團隊，於六月初夏夜晚獻上一場充滿愛與溫度的音樂饗宴。免費入場，誠摯邀請您蒞臨聆聽。",
     meta: [
       { icon: Calendar, text: "2026/06/06（六）19:30–21:00" },
-      { icon: MapPin, text: "慈濟安平聯絡處（台南市安平區國平路 211 號）" },
+      { icon: MapPin, text: "慈濟安平聯絡處" },
     ],
     notices: [
       {
