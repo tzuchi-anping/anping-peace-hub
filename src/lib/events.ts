@@ -1,10 +1,8 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Calendar,
-  CalendarPlus,
   Clock,
   MapPin,
-  Flower2,
   Gift,
   ArrowRight,
   AlertCircle,
@@ -13,7 +11,6 @@ import {
   Music2,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
-import posterBathingBuddha from "@/assets/buddha-2026.jpg";
 import posterAfforestation from "@/assets/afforestation.jpg";
 import posterChineseMusicConcert from "@/assets/2026ChineseMusicConcert.jpg";
 import {
@@ -73,54 +70,6 @@ const ARROW_HOVER_CLASS = "group-hover:translate-x-0.5 transition-transform";
 // 新增活動：在這裡加一筆 UpcomingEvent 物件即可，不需碰 UI 元件。
 
 export const UPCOMING_EVENTS: UpcomingEvent[] = [
-  /* ── 2026 浴佛大典 ── */
-  {
-    id: "bathing-buddha",
-    image: posterBathingBuddha,
-    imageAlt: "2026 浴佛大典海報",
-    imageFit: "contain",
-    badge: { icon: Flower2, text: "浴佛大典・60 周年", color: "sage" },
-    title: "2026 浴佛大典",
-    subtitle: "與佛相遇 — 慈濟 60 周年",
-    description:
-      "誠摯邀約大家來到安平聯絡處，洗滌心垢、祈求平安。今年更有慈濟 60 周年特別展出與豐富互動活動。",
-    meta: [
-      { icon: Calendar, text: "2026/05/10（日）" },
-      { icon: MapPin, text: "慈濟安平聯絡處" },
-    ],
-    notices: [
-      {
-        type: "list",
-        titleIcon: Clock,
-        title: "活動場次",
-        items: [
-          "07:00 浴佛大典・慈誠委員連線場次（06:30 入場・1F 佛堂）",
-          "09:00 六十周年慶大會（1F 佛堂）",
-          "10:30・11:30・14:00 浴佛大典・社區場次（請提早 15 分鐘入場）",
-          "10:30 後・平安麵於環保教育站結緣",
-        ],
-      },
-      {
-        type: "list",
-        titleIcon: Gift,
-        title: "活動亮點",
-        items: [
-          "限量祝福：60 周年結緣品與壽桃",
-          "溫暖服務：淨手奉茶、平安麵結緣",
-          "互動體驗：花道手作、靜思語解籤",
-        ],
-      },
-    ],
-    actions: [
-      {
-        label: "加入行事曆",
-        href: "https://calendar.google.com/calendar/render?action=TEMPLATE&text=2026%20%E6%B5%B4%E4%BD%9B%E5%A4%A7%E5%85%B8%EF%BC%88%E7%A4%BE%E5%8D%80%E5%A0%B4%E6%AC%A1%EF%BC%89&dates=20260510T023000Z%2F20260510T043000Z&details=%E8%88%87%E4%BD%9B%E7%9B%B8%E9%81%87%E2%80%94%E6%85%88%E6%BF%9F%2060%20%E5%91%A8%E5%B9%B4%E6%B5%B4%E4%BD%9B%E5%A4%A7%E5%85%B8%E3%80%82%E7%A4%BE%E5%8D%80%E5%A0%B4%E6%AC%A1%EF%BC%9A10%3A30%E3%80%8111%3A30%E3%80%8114%3A00%EF%BC%88%E8%AB%8B%E6%8F%90%E6%97%A9%2015%20%E5%88%86%E9%90%98%E5%85%A5%E5%A0%B4%EF%BC%89&location=%E6%85%88%E6%BF%9F%E5%AE%89%E5%B9%B3%E8%81%AF%E7%B5%A1%E8%99%95%EF%BC%88%E8%87%BA%E5%8D%97%E5%B8%82%E5%AE%89%E5%B9%B3%E5%8D%80%E5%9C%8B%E5%B9%B3%E8%B7%AF%20211%20%E8%99%9F%EF%BC%89",
-        variant: "warm",
-        leadingIcon: CalendarPlus,
-      },
-    ],
-  },
-
   /* ── 玩市集 種森林 ── */
   {
     id: "afforestation-market",
