@@ -19,3 +19,6 @@ export const AFFORESTATION_REGISTRATION_URL = "https://forms.gle/yMXrfLHvR2hDcEB
 // Chinese music concert event constants
 export const CHINESE_MUSIC_CONCERT_REGISTRATION_URL = "https://lin.ee/etc0uYZ";
 
+// Youth potential exploration camp event constants
+export const YOUTH_POTENTIAL_CAMP_REGISTRATION_URL = "https://forms.gle/gPBUV17V5nqCKBFz8";
+

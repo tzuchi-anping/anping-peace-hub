@@ -9,16 +9,21 @@ import {
   Leaf,
   ExternalLink,
   Music2,
+  Sparkles,
+  Users,
+  Ticket,
 } from "lucide-react";
 import posterTrain from "@/assets/tzuchi-train-2026.png";
 import posterAfforestation from "@/assets/afforestation.jpg";
 import posterChineseMusicConcert from "@/assets/2026ChineseMusicConcert.jpg";
+import posterYouthCamp from "@/assets/youth-potential-camp-2026.png";
 import {
   TZUCHI_TRAIN_EVENT_DATE,
   TZUCHI_TRAIN_IS_FULL,
   AFFORESTATION_REGISTRATION_URL,
   PLANTOPIA_REGISTRATION_URL,
   CHINESE_MUSIC_CONCERT_REGISTRATION_URL,
+  YOUTH_POTENTIAL_CAMP_REGISTRATION_URL,
 } from "./constants";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -70,6 +75,52 @@ const ARROW_HOVER_CLASS = "group-hover:translate-x-0.5 transition-transform";
 // 新增活動：在這裡加一筆 UpcomingEvent 物件即可，不需碰 UI 元件。
 
 export const UPCOMING_EVENTS: UpcomingEvent[] = [
+  /* ── 青少心聚點 潛能探索營 ── */
+  {
+    id: "youth-potential-camp",
+    image: posterYouthCamp,
+    imageAlt: "青少心聚點・潛能探索營海報",
+    imageFit: "contain",
+    badge: { icon: Sparkles, text: "青少年潛能探索・三梯次", color: "warm-amber" },
+    title: "青少心聚點・潛能探索營",
+    subtitle: "找到屬於你的閃光點，成就更好的自己！",
+    description:
+      "暑假即將到來，邀請孩子在專業講師引導下，學習非洲鼓、體驗木工職人精神，甚至掌握最夯的 AI 應用！以「培力 × 服務」為核心，不僅培養個人興趣與技能，更透過服務行動連結社區，成就更好的自己。歡迎邀請關懷家庭青少年一起參與！",
+    meta: [
+      { icon: Users, text: "國一至高二學生（含小六畢業生）" },
+      { icon: MapPin, text: "慈濟安平聯絡處" },
+      { icon: Gift, text: "全程免費，並提供素食午餐" },
+      { icon: Clock, text: "即日起至 6/15 報名截止（每梯次限 20 名）" },
+    ],
+    notices: [
+      {
+        type: "list",
+        titleIcon: Calendar,
+        title: "三梯次精彩課程",
+        items: [
+          "「鼓」動青春・非洲鼓：7/7（二）– 7/10（五）",
+          "職人修煉大賽・木工：7/13（一）– 7/15（三）",
+          "智造新視界・AI 生活應用：7/22（三）– 7/24（五）",
+          "圓緣成果展暨志工關懷行動：7/28（二）",
+        ],
+      },
+      {
+        type: "banner",
+        icon: Ticket,
+        text: "報名方式：紙本報名或線上報名。聯絡窗口：徐社工 06-2792999 分機 320",
+        color: "warm-amber",
+      },
+    ],
+    actions: [
+      {
+        label: "線上報名",
+        href: YOUTH_POTENTIAL_CAMP_REGISTRATION_URL,
+        variant: "warm",
+        leadingIcon: ExternalLink,
+      },
+    ],
+  },
+
   /* ── 玩市集 種森林 ── */
   {
     id: "afforestation-market",
